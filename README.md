@@ -8,14 +8,19 @@ Professional full-stack-ready website scaffold for a New Zealand construction ma
 - TypeScript
 - Tailwind CSS
 - Component-based UI
-- Mock content repository in `src/data/content.ts`
-- Admin dashboard placeholder with local CRUD state
+- MySQL 8 local database via Docker Compose
+- Prisma ORM, migrations and seed data
+- Mock content fixtures in `src/data/content.ts` used as the database seed and read fallback
+- Admin dashboard with API-backed CRUD tables
 - Enquiry API route at `src/app/api/enquiries/route.ts`
 
 ## Run Locally
 
 ```bash
 npm install
+docker compose up -d
+npm run db:migrate
+npm run db:seed
 npm run dev
 ```
 
@@ -23,10 +28,14 @@ PowerShell on this machine may block `npm.ps1`. Use:
 
 ```bash
 npm.cmd install
+npm.cmd run db:migrate
+npm.cmd run db:seed
 npm.cmd run dev
 ```
 
 Open `http://localhost:3000`.
+
+If Docker is not installed, install Docker Desktop first or point `DATABASE_URL` at an existing local MySQL 8 database. Read paths fall back to the seed fixture data if the database is unavailable, but admin writes and contact form persistence require MySQL.
 
 ## Main Structure
 
@@ -40,8 +49,14 @@ src/app
   resources                        Blog/resource articles
   about                            Company positioning
   contact                          Forms and contact details
-  admin                            Admin dashboard and mock CRUD pages
-  api/enquiries                    Basic form submission endpoint
+  admin                            Admin dashboard and database-backed CRUD pages
+  api/admin/[resource]             Generic admin CRUD endpoint
+  api/enquiries                    Database-backed form submission endpoint
+
+prisma
+  schema.prisma                    MySQL schema
+  migrations                       Initial database migration
+  seed.ts                          Seed script using existing content fixtures
 
 src/components
   admin                            Admin table/editor component
@@ -49,20 +64,38 @@ src/components
   forms                            Filters and enquiry form
   site                             Layout, hero and section components
 
-src/data/content.ts                Mock products, solutions, documents, projects, articles and enquiries
+src/data/content.ts                Seed fixtures and database fallback content
+src/lib/contentRepository.ts       Public content read/write repository
+src/lib/adminRepository.ts         Admin table CRUD repository
+src/lib/db.ts                      Shared Prisma client
 src/types/content.ts               Shared content types
 public/images                      Local placeholder visual assets
 ```
 
-## Future Database or CMS Integration
+## Database
 
-The current pages read from `src/data/content.ts`. To connect PostgreSQL, Supabase, Prisma or a headless CMS later:
+Local MySQL is configured through `docker-compose.yml`:
 
-1. Keep the types in `src/types/content.ts` as the initial contract.
-2. Replace direct imports from `src/data/content.ts` with service functions such as `getProducts()`, `getProductBySlug()`, `getDocuments()`, and `createEnquiry()`.
-3. Move admin CRUD operations from local React state to API routes or server actions.
-4. Add real authentication for `/admin` using NextAuth, Supabase Auth or the selected CMS.
-5. Replace placeholder file URLs in `technicalDocuments` with object storage or CMS asset URLs.
+- Database: `rhinora`
+- User: `rhinora`
+- Password: `rhinora_local_password`
+- Port: `3306`
+
+Use `.env.example` as the template for local configuration:
+
+```bash
+DATABASE_URL="mysql://rhinora:rhinora_local_password@localhost:3306/rhinora"
+```
+
+Useful commands:
+
+```bash
+npm.cmd run db:migrate
+npm.cmd run db:seed
+npm.cmd run db:studio
+```
+
+Future CMS integration can replace the repository functions in `src/lib/contentRepository.ts` and `src/lib/adminRepository.ts` without changing the public page components heavily.
 
 ## SEO Notes
 
@@ -71,9 +104,9 @@ The current pages read from `src/data/content.ts`. To connect PostgreSQL, Supaba
 - Clean URLs are used for products, solutions, projects and resources.
 - Resource content is structured for NZ construction search terms such as waterproofing membrane NZ, commercial waterproofing, roof protection, building envelope materials and technical construction products.
 
-## Admin Placeholder
+## Admin
 
-The admin area is intentionally functional but mock-backed. It demonstrates the expected content management surfaces:
+The admin area keeps the authentication placeholder but persists table changes to MySQL when the database is running. It covers:
 
 - Products
 - Categories
@@ -83,4 +116,4 @@ The admin area is intentionally functional but mock-backed. It demonstrates the 
 - Blog / resources
 - Enquiries
 
-Changes made in admin tables are held in browser state only until a database or CMS is connected.
+The first version keeps compact table forms and preserves richer editorial JSON fields from the seed data unless a row is deleted or recreated.

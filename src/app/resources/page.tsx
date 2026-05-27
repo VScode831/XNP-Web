@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { articles } from "@/data/content";
+import { getArticles } from "@/lib/contentRepository";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata("Resources", "Articles for designers, architects, builders and developers about waterproofing, roof renewal, compliance, product guidance and installation.", "/resources");
+export const dynamic = "force-dynamic";
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  const articles = await getArticles();
+
   return (
     <>
       <PageHero eyebrow="Resources" title="Technical Articles for Designers, Builders and Developers" description="SEO-ready resource structure for waterproofing, roof renewal, compliance, product guidance and installation tips." />

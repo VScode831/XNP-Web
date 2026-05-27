@@ -24,10 +24,7 @@ export function Header() {
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="grid h-10 w-10 place-items-center rounded-sm bg-forest-700 text-lg font-bold text-white">R</span>
-          <span>
-            <span className="block text-xl font-bold tracking-tight text-ink">Rhinora</span>
-            <span className="block text-xs uppercase tracking-[0.18em] text-ink/55">Material Systems</span>
-          </span>
+          <span className="block text-2xl font-bold tracking-tight text-ink">Rhinora</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink/72 lg:flex">
           {navItems.map((item) => (

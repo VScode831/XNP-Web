@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { findArticle } from "@/data/content";
+import { getArticleBySlug } from "@/lib/contentRepository";
 
 type Props = { params: Promise<{ slug: string }> };
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = findArticle(slug);
+  const article = await getArticleBySlug(slug);
   if (!article) return {};
   return {
     title: article.seoTitle,
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = findArticle(slug);
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   return (

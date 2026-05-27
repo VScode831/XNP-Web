@@ -5,23 +5,24 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { findProject, productsForIds } from "@/data/content";
+import { getProducts, getProjectBySlug, productsForIds } from "@/lib/contentRepository";
 import { pageMetadata } from "@/lib/metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = findProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return pageMetadata(project.name, project.summary, `/projects/${slug}`);
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = findProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
-  const usedProducts = productsForIds(project.productIds);
+  const usedProducts = productsForIds(await getProducts(), project.productIds);
 
   return (
     <>

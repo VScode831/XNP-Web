@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id               String            @id
+  name             String
+  slug             String            @unique
+  category         String
+  shortDescription String            @db.Text
+  description      String            @db.Text
+  applications     Json
+  benefits         Json
+  specifications   Json
+  compliance       Json
+  image            String
+  status           String            @default("draft")
+  sortOrder        Int               @default(0)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  documents        ProductDocument[]
+  projects         ProjectProduct[]
+  relatedFrom      RelatedProduct[]  @relation("RelatedFrom")
+  relatedTo        RelatedProduct[]  @relation("RelatedTo")
+  solutions        ProductSolution[]
+}
+
+model Solution {
+  id                  String             @id
+  title               String
+  slug                String             @unique
+  summary             String             @db.Text
+  overview            String             @db.Text
+  applications        Json
+  layers              Json
+  benefits            Json
+  image               String
+  status              String             @default("draft")
+  sortOrder           Int                @default(0)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  documents           SolutionDocument[]
+  recommendedProducts ProductSolution[]
+}
+
+model TechnicalDocument {
+  id          String             @id
+  title       String
+  type        String
+  category    String
+  application String
+  fileUrl     String
+  version     String
+  publishDate DateTime
+  sortOrder   Int                @default(0)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  products    ProductDocument[]
+  solutions   SolutionDocument[]
+}
+
+model Project {
+  id        String           @id
+  name      String
+  slug      String           @unique
+  sector    String
+  location  String
+  summary   String           @db.Text
+  overview  String           @db.Text
+  challenge String           @db.Text
+  solution  String           @db.Text
+  result    String           @db.Text
+  images    Json
+  sortOrder Int              @default(0)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  products  ProjectProduct[]
+}
+
+model Article {
+  id              String   @id
+  title           String
+  slug            String   @unique
+  category        String
+  excerpt         String   @db.Text
+  body            String   @db.Text
+  seoTitle        String
+  metaDescription String   @db.Text
+  tags            Json
+  publishDate     DateTime
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Category {
+  id        String   @id
+  type      String
+  name      String
+  slug      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([type, slug])
+}
+
+model Enquiry {
+  id              String   @id
+  type            String
+  name            String
+  company         String   @default("")
+  email           String
+  phone           String?
+  message         String   @db.Text
+  relatedProduct  String?
+  relatedSolution String?
+  dateSubmitted   DateTime @default(now())
+  status          String   @default("new")
+}
+
+model ProductSolution {
+  productId  String
+  solutionId String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  solution   Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@id([productId, solutionId])
+}
+
+model ProductDocument {
+  productId  String
+  documentId String
+  document   TechnicalDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  product    Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([productId, documentId])
+}
+
+model SolutionDocument {
+  solutionId String
+  documentId String
+  document   TechnicalDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  solution   Solution          @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@id([solutionId, documentId])
+}
+
+model ProjectProduct {
+  projectId String
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, productId])
+}
+
+model RelatedProduct {
+  productId        String
+  relatedProductId String
+  product          Product @relation("RelatedFrom", fields: [productId], references: [id], onDelete: Cascade)
+  relatedProduct   Product @relation("RelatedTo", fields: [relatedProductId], references: [id], onDelete: Cascade)
+
+  @@id([productId, relatedProductId])
+}

@@ -1,13 +1,8 @@
 import { AdminTable } from "@/components/admin/AdminTable";
-import { productCategories, solutions, articles } from "@/data/content";
-import { unique } from "@/lib/filters";
+import { listAdminRows } from "@/lib/adminRepository";
 
-export default function AdminCategoriesPage() {
-  const rows = [
-    ...productCategories.map((category) => ({ id: `product-${category}`, type: "Product category", name: category, slug: category.toLowerCase().replaceAll(" ", "-") })),
-    ...solutions.map((solution) => ({ id: `solution-${solution.id}`, type: "Solution category", name: solution.title, slug: solution.slug })),
-    ...unique(articles.map((article) => article.category)).map((category) => ({ id: `resource-${category}`, type: "Resource category", name: category, slug: category.replaceAll(" ", "-") }))
-  ];
+export const dynamic = "force-dynamic";
 
-  return <AdminTable title="Categories" columns={["type", "name", "slug"]} rows={rows} />;
+export default async function AdminCategoriesPage() {
+  return <AdminTable title="Categories" resource="categories" columns={["type", "name", "slug"]} rows={await listAdminRows("categories")} />;
 }

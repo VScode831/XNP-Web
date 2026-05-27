@@ -8,25 +8,35 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { ButtonLink } from "@/components/site/ButtonLink";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { documentsForIds, findProduct, productsForIds, solutionsForIds } from "@/data/content";
+import {
+  documentsForIds,
+  getDocuments,
+  getProductBySlug,
+  getProducts,
+  getSolutions,
+  productsForIds,
+  solutionsForIds
+} from "@/lib/contentRepository";
 import { pageMetadata } from "@/lib/metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return pageMetadata(product.name, `${product.shortDescription} Product information for New Zealand construction projects.`, `/products/${slug}`);
 }
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
-  const documents = documentsForIds(product.documentIds);
-  const relatedSolutions = solutionsForIds(product.solutionIds);
-  const relatedProducts = productsForIds(product.relatedProductIds).filter((item) => item.status === "published");
+  const [allDocuments, allProducts, allSolutions] = await Promise.all([getDocuments(), getProducts(), getSolutions()]);
+  const documents = documentsForIds(allDocuments, product.documentIds);
+  const relatedSolutions = solutionsForIds(allSolutions, product.solutionIds);
+  const relatedProducts = productsForIds(allProducts, product.relatedProductIds).filter((item) => item.status === "published");
 
   const schema = {
     "@context": "https://schema.org",

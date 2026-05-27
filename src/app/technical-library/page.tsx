@@ -3,16 +3,20 @@ import { DocumentCard } from "@/components/cards/DocumentCard";
 import { FilterPanel } from "@/components/forms/FilterPanel";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { applications, documentTypes, productCategories, technicalDocuments } from "@/data/content";
+import { getApplications, getDocuments, getDocumentTypes, getProductCategories } from "@/lib/contentRepository";
 import { includesText } from "@/lib/filters";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata("Technical Library", "Search technical data sheets, installation guides, CAD details, warranties, compliance documents and brochures.", "/technical-library");
+export const dynamic = "force-dynamic";
 
 type Props = { searchParams: Promise<Record<string, string | undefined>> };
 
 export default async function TechnicalLibraryPage({ searchParams }: Props) {
   const params = await searchParams;
+  const [technicalDocuments, productCategories] = await Promise.all([getDocuments(), getProductCategories()]);
+  const applications = getApplications();
+  const documentTypes = getDocumentTypes();
   const q = params.q ?? "";
   const category = params.category ?? "";
   const type = params.type ?? "";

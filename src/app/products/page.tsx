@@ -3,16 +3,18 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { FilterPanel } from "@/components/forms/FilterPanel";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { applications, productCategories, products } from "@/data/content";
+import { getApplications, getProductCategories, getProducts } from "@/lib/contentRepository";
 import { includesText } from "@/lib/filters";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata("Products", "Search Rhinora construction material products by application, category and keyword.", "/products");
+export const dynamic = "force-dynamic";
 
 type Props = { searchParams: Promise<Record<string, string | undefined>> };
 
 export default async function ProductsPage({ searchParams }: Props) {
   const params = await searchParams;
+  const [products, productCategories, applications] = await Promise.all([getProducts(), getProductCategories(), Promise.resolve(getApplications())]);
   const q = params.q ?? "";
   const category = params.category ?? "";
   const application = params.application ?? "";

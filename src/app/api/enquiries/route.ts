@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createEnquiry } from "@/lib/contentRepository";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -9,12 +10,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `Missing fields: ${missing.join(", ")}` }, { status: 400 });
   }
 
-  const enquiry = {
-    id: `enq-${Date.now()}`,
-    ...body,
-    dateSubmitted: new Date().toISOString(),
-    status: "new"
-  };
-
-  return NextResponse.json({ enquiry }, { status: 201 });
+  try {
+    const enquiry = await createEnquiry(body);
+    return NextResponse.json({ enquiry }, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: "Unable to store enquiry" }, { status: 500 });
+  }
 }

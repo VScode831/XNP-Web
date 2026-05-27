@@ -1,6 +1,8 @@
 import { AdminTable } from "@/components/admin/AdminTable";
-import { technicalDocuments } from "@/data/content";
+import { listAdminRows } from "@/lib/adminRepository";
 
-export default function AdminDocumentsPage() {
-  return <AdminTable title="Documents" columns={["title", "type", "category", "application", "fileUrl", "version", "publishDate"]} rows={technicalDocuments.map((document) => ({ id: document.id, title: document.title, type: document.type, category: document.category, application: document.application, fileUrl: document.fileUrl, version: document.version, publishDate: document.publishDate }))} />;
+export const dynamic = "force-dynamic";
+
+export default async function AdminDocumentsPage() {
+  return <AdminTable title="Documents" resource="documents" columns={["title", "type", "category", "application", "productId", "solutionId", "fileUrl", "version", "publishDate"]} rows={await listAdminRows("documents")} />;
 }

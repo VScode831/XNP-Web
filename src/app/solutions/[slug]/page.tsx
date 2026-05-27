@@ -5,25 +5,27 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { documentsForIds, findSolution, productsForIds } from "@/data/content";
+import { documentsForIds, getDocuments, getProducts, getSolutionBySlug, productsForIds } from "@/lib/contentRepository";
 import { pageMetadata } from "@/lib/metadata";
 
 type Props = { params: Promise<{ slug: string }> };
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const solution = findSolution(slug);
+  const solution = await getSolutionBySlug(slug);
   if (!solution) return {};
   return pageMetadata(solution.title, `${solution.summary} Technical construction product systems for New Zealand projects.`, `/solutions/${slug}`);
 }
 
 export default async function SolutionDetailPage({ params }: Props) {
   const { slug } = await params;
-  const solution = findSolution(slug);
+  const solution = await getSolutionBySlug(slug);
   if (!solution) notFound();
 
-  const recommendedProducts = productsForIds(solution.recommendedProductIds);
-  const documents = documentsForIds(solution.documentIds);
+  const [allProducts, allDocuments] = await Promise.all([getProducts(), getDocuments()]);
+  const recommendedProducts = productsForIds(allProducts, solution.recommendedProductIds);
+  const documents = documentsForIds(allDocuments, solution.documentIds);
 
   return (
     <>

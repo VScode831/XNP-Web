@@ -4,17 +4,19 @@ import Link from "next/link";
 import { FilterPanel } from "@/components/forms/FilterPanel";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
-import { projects } from "@/data/content";
+import { getProjects } from "@/lib/contentRepository";
 import { includesText } from "@/lib/filters";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata("Projects", "Rhinora project case studies for commercial, residential, industrial, education and healthcare sectors.", "/projects");
+export const dynamic = "force-dynamic";
 
 const sectors = ["commercial", "residential", "industrial", "education", "healthcare"] as const;
 type Props = { searchParams: Promise<Record<string, string | undefined>> };
 
 export default async function ProjectsPage({ searchParams }: Props) {
   const params = await searchParams;
+  const projects = await getProjects();
   const sector = params.sector ?? "";
   const q = params.q ?? "";
   const visible = projects.filter((project) => (!sector || project.sector === sector) && includesText([project.name, project.location, project.summary, project.sector], q));

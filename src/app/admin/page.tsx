@@ -1,8 +1,18 @@
 import { Database, FileText, Inbox, Layers, Package, PenSquare } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { articles, enquiries, products, projects, solutions, technicalDocuments } from "@/data/content";
+import { getArticles, getDocuments, getEnquiries, getProducts, getProjects, getSolutions } from "@/lib/contentRepository";
 
-export default function AdminDashboardPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminDashboardPage() {
+  const [products, solutions, technicalDocuments, projects, articles, enquiries] = await Promise.all([
+    getProducts(),
+    getSolutions(),
+    getDocuments(),
+    getProjects(),
+    getArticles(),
+    getEnquiries()
+  ]);
   const stats: Array<[string, number, LucideIcon]> = [
     ["Products", products.length, Package],
     ["Solutions", solutions.length, Layers],

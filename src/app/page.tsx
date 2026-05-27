@@ -6,9 +6,17 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { SolutionCard } from "@/components/cards/SolutionCard";
 import { ButtonLink } from "@/components/site/ButtonLink";
 import { Section } from "@/components/site/Section";
-import { productCategories, products, projects, solutions } from "@/data/content";
+import { getProductCategories, getProducts, getProjects, getSolutions } from "@/lib/contentRepository";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [productCategories, products, projects, solutions] = await Promise.all([
+    getProductCategories(),
+    getProducts(),
+    getProjects(),
+    getSolutions()
+  ]);
   const featuredProducts = products.filter((product) => product.status === "published").slice(0, 3);
   const reasons: Array<[string, LucideIcon, string]> = [
     ["System thinking", Blocks, "Products are presented as compatible assemblies for roofs, decks, tanking and envelope interfaces."],
