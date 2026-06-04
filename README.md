@@ -8,19 +8,15 @@ Professional full-stack-ready website scaffold for a New Zealand construction ma
 - TypeScript
 - Tailwind CSS
 - Component-based UI
-- MySQL 8 local database via Docker Compose
-- Prisma ORM, migrations and seed data
-- Mock content fixtures in `src/data/content.ts` used as the database seed and read fallback
-- Admin dashboard with API-backed CRUD tables
+- Mock content repository in `src/data/content.ts`
+- Admin dashboard placeholder with local CRUD state
 - Enquiry API route at `src/app/api/enquiries/route.ts`
+- Prisma retained for future Supabase/Postgres integration
 
 ## Run Locally
 
 ```bash
 npm install
-docker compose up -d
-npm run db:migrate
-npm run db:seed
 npm run dev
 ```
 
@@ -28,14 +24,12 @@ PowerShell on this machine may block `npm.ps1`. Use:
 
 ```bash
 npm.cmd install
-npm.cmd run db:migrate
-npm.cmd run db:seed
 npm.cmd run dev
 ```
 
 Open `http://localhost:3000`.
 
-If Docker is not installed, install Docker Desktop first or point `DATABASE_URL` at an existing local MySQL 8 database. Read paths fall back to the seed fixture data if the database is unavailable, but admin writes and contact form persistence require MySQL.
+No local database is required. Public pages, admin screens and contact form responses use in-repo fixture data for now.
 
 ## Main Structure
 
@@ -49,14 +43,12 @@ src/app
   resources                        Blog/resource articles
   about                            Company positioning
   contact                          Forms and contact details
-  admin                            Admin dashboard and database-backed CRUD pages
-  api/admin/[resource]             Generic admin CRUD endpoint
-  api/enquiries                    Database-backed form submission endpoint
+  admin                            Admin dashboard and mock CRUD pages
+  api/enquiries                    Basic form submission endpoint
 
 prisma
-  schema.prisma                    MySQL schema
-  migrations                       Initial database migration
-  seed.ts                          Seed script using existing content fixtures
+  schema.prisma                    Future Supabase/Postgres Prisma schema
+  seed.ts                          Future seed script
 
 src/components
   admin                            Admin table/editor component
@@ -64,38 +56,24 @@ src/components
   forms                            Filters and enquiry form
   site                             Layout, hero and section components
 
-src/data/content.ts                Seed fixtures and database fallback content
-src/lib/contentRepository.ts       Public content read/write repository
-src/lib/adminRepository.ts         Admin table CRUD repository
-src/lib/db.ts                      Shared Prisma client
+src/data/content.ts                Mock products, solutions, documents, projects, articles and enquiries
+src/lib/contentRepository.ts       Fixture-backed public content service
+src/lib/adminRepository.ts         Fixture-backed admin table listing service
 src/types/content.ts               Shared content types
 public/images                      Local placeholder visual assets
 ```
 
-## Database
+## Future Supabase, Database or CMS Integration
 
-Local MySQL is configured through `docker-compose.yml`:
+The current website does not connect to a database at runtime. `@prisma/client`, `prisma` and `prisma/schema.prisma` remain in the project so a future Supabase/Postgres integration can reuse the existing data model.
 
-- Database: `rhinora`
-- User: `rhinora`
-- Password: `rhinora_local_password`
-- Port: `3306`
+1. Keep the types in `src/types/content.ts` as the initial contract.
+2. Keep page components calling service functions such as `getProducts()`, `getProductBySlug()`, `getDocuments()`, and `createEnquiry()`.
+3. Replace the fixture-backed implementation in `src/lib/contentRepository.ts` with Prisma, Supabase or CMS calls.
+4. Add real authentication for `/admin` using NextAuth, Supabase Auth or the selected CMS.
+5. Replace placeholder file URLs in `technicalDocuments` with object storage or CMS asset URLs.
 
-Use `.env.example` as the template for local configuration:
-
-```bash
-DATABASE_URL="mysql://rhinora:rhinora_local_password@localhost:3306/rhinora"
-```
-
-Useful commands:
-
-```bash
-npm.cmd run db:migrate
-npm.cmd run db:seed
-npm.cmd run db:studio
-```
-
-Future CMS integration can replace the repository functions in `src/lib/contentRepository.ts` and `src/lib/adminRepository.ts` without changing the public page components heavily.
+For future Prisma work, copy `.env.example`, set `DATABASE_URL` to a Supabase/Postgres connection string, then run the Prisma command needed for that integration. Do not run any database command for normal local website development.
 
 ## SEO Notes
 
@@ -104,9 +82,9 @@ Future CMS integration can replace the repository functions in `src/lib/contentR
 - Clean URLs are used for products, solutions, projects and resources.
 - Resource content is structured for NZ construction search terms such as waterproofing membrane NZ, commercial waterproofing, roof protection, building envelope materials and technical construction products.
 
-## Admin
+## Admin Placeholder
 
-The admin area keeps the authentication placeholder but persists table changes to MySQL when the database is running. It covers:
+The admin area is intentionally functional but mock-backed. It demonstrates the expected content management surfaces:
 
 - Products
 - Categories
@@ -116,4 +94,4 @@ The admin area keeps the authentication placeholder but persists table changes t
 - Blog / resources
 - Enquiries
 
-The first version keeps compact table forms and preserves richer editorial JSON fields from the seed data unless a row is deleted or recreated.
+Changes made in admin tables are held in browser state only until Supabase, another database or a CMS is connected. Contact form submissions return a shaped response from the API route but are not persisted.

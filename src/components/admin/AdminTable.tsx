@@ -4,65 +4,19 @@ import { Edit3, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 type Row = Record<string, string | number | undefined>;
-const longFields = new Set([
-  "applications",
-  "benefits",
-  "body",
-  "challenge",
-  "compliance",
-  "description",
-  "documentIds",
-  "images",
-  "layers",
-  "message",
-  "metaDescription",
-  "overview",
-  "productIds",
-  "recommendedProductIds",
-  "relatedProductIds",
-  "result",
-  "solution",
-  "solutionIds",
-  "specifications",
-  "summary",
-  "tags"
-]);
+const longFields = new Set(["message", "metaDescription", "shortDescription", "summary"]);
 
-export function AdminTable({ title, rows, columns, resource }: { title: string; rows: Row[]; columns: string[]; resource: string }) {
+export function AdminTable({ title, rows, columns }: { title: string; rows: Row[]; columns: string[]; resource: string }) {
   const [items, setItems] = useState(rows);
   const [editing, setEditing] = useState<Row | null>(null);
-  const [error, setError] = useState("");
 
-  async function remove(index: number) {
-    setError("");
-    const row = items[index];
-    const response = await fetch(`/api/admin/${resource}`, {
-      method: "DELETE",
-      body: JSON.stringify({ id: row.id }),
-      headers: { "Content-Type": "application/json" }
-    });
-    if (!response.ok) {
-      setError("Unable to delete this row. Check the database connection and related records.");
-      return;
-    }
+  function remove(index: number) {
     setItems((current) => current.filter((_, itemIndex) => itemIndex !== index));
   }
 
-  async function save(formData: FormData) {
-    setError("");
+  function save(formData: FormData) {
     const row = Object.fromEntries(columns.map((column) => [column, String(formData.get(column) ?? "")])) as Row;
-    const payload = editing?.id ? { id: editing.id, ...row } : row;
-    const response = await fetch(`/api/admin/${resource}`, {
-      method: editing?.id ? "PUT" : "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" }
-    });
-    if (!response.ok) {
-      setError("Unable to save this row. Check required fields and database connection.");
-      return;
-    }
-    const result = (await response.json()) as { row?: Row };
-    const saved = result.row ?? payload;
+    const saved = editing?.id ? { id: editing.id, ...row } : { id: `local-${Date.now()}`, ...row };
     if (editing) {
       setItems((current) => current.map((item) => (item.id === editing.id ? { ...editing, ...saved } : item)));
     } else {
@@ -100,7 +54,6 @@ export function AdminTable({ title, rows, columns, resource }: { title: string; 
           </tbody>
         </table>
       </div>
-      {error && <p className="mt-4 rounded-sm bg-clay/10 px-3 py-2 text-sm font-semibold text-clay">{error}</p>}
       {editing && (
         <form action={save} className="mt-6 grid gap-3 rounded-sm bg-forest-50 p-4 md:grid-cols-2">
           {columns.map((column) => (
