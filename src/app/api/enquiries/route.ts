@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createEnquiry } from "@/lib/contentRepository";
+import { createEnquiry } from "@/lib/enquiryRepository";
 
 export async function POST(request: Request) {
   const body = await request.json();

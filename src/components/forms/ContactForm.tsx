@@ -1,6 +1,7 @@
 "use client";
 
 import { Send } from "lucide-react";
+import type { FormEvent } from "react";
 import { useState } from "react";
 
 type ContactFormProps = {
@@ -12,8 +13,10 @@ type ContactFormProps = {
 export function ContactForm({ defaultType = "General", relatedProduct, relatedSolution }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
 
-  async function submit(formData: FormData) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setStatus("idle");
+    const formData = new FormData(event.currentTarget);
     const response = await fetch("/api/enquiries", {
       method: "POST",
       body: JSON.stringify(Object.fromEntries(formData)),
@@ -23,7 +26,7 @@ export function ContactForm({ defaultType = "General", relatedProduct, relatedSo
   }
 
   return (
-    <form action={submit} className="rounded-sm border border-black/10 bg-white p-5 shadow-soft">
+    <form onSubmit={submit} className="rounded-sm border border-black/10 bg-white p-5 shadow-soft">
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
           Enquiry type
@@ -59,7 +62,7 @@ export function ContactForm({ defaultType = "General", relatedProduct, relatedSo
       <button className="mt-5 inline-flex items-center gap-2 rounded-sm bg-forest-700 px-5 py-3 text-sm font-semibold text-white hover:bg-forest-900">
         <Send size={16} /> Submit enquiry
       </button>
-      {status === "sent" && <p className="mt-3 text-sm font-semibold text-forest-700">Enquiry captured in the mock API.</p>}
+      {status === "sent" && <p className="mt-3 text-sm font-semibold text-forest-700">Enquiry submitted successfully.</p>}
       {status === "error" && <p className="mt-3 text-sm font-semibold text-clay">There was a problem submitting the enquiry.</p>}
     </form>
   );

@@ -111,17 +111,19 @@ model Category {
 }
 
 model Enquiry {
-  id              String   @id
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   type            String
   name            String
   company         String   @default("")
   email           String
   phone           String?
   message         String   @db.Text
-  relatedProduct  String?
-  relatedSolution String?
-  dateSubmitted   DateTime @default(now())
+  relatedProduct  String?  @map("related_product")
+  relatedSolution String?  @map("related_solution")
+  dateSubmitted   DateTime @default(now()) @map("date_submitted")
   status          String   @default("new")
+
+  @@map("enquiries")
 }
 
 model ProductSolution {
