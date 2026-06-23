@@ -2,11 +2,11 @@ import {
   getArticles,
   getCategories,
   getDocuments,
-  getEnquiries,
   getProducts,
   getProjects,
   getSolutions
 } from "@/lib/contentRepository";
+import { listEnquiries } from "@/lib/enquiryRepository";
 
 export type AdminResource =
   | "articles"
@@ -79,7 +79,7 @@ export async function listAdminRows(resource: AdminResource): Promise<AdminRow[]
       slug: category.slug
     }));
   }
-  return (await getEnquiries()).map((enquiry) => ({
+  return (await listEnquiries()).map((enquiry) => ({
     id: enquiry.id,
     type: enquiry.type,
     name: enquiry.name,

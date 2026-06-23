@@ -68,7 +68,7 @@ export async function getEnquiries() {
 export async function getCategories(): Promise<CategoryRow[]> {
   return [
     ...productCategories.map((name) => ({ id: `product-${slugify(name)}`, type: "Product category", name, slug: slugify(name) })),
-    ...solutions.map((solution) => ({ id: `solution-${solution.id}`, type: "Solution category", name: solution.title, slug: solution.slug })),
+    ...solutions.map((solution) => ({ id: `system-${solution.id}`, type: "System", name: solution.title, slug: solution.slug })),
     ...Array.from(new Set(articles.map((article) => article.category))).map((name) => ({
       id: `resource-${slugify(name)}`,
       type: "Resource category",

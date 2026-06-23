@@ -7,7 +7,7 @@ import { getApplications, getDocuments, getDocumentTypes, getProductCategories }
 import { includesText } from "@/lib/filters";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata("Technical Library", "Search technical data sheets, installation guides, CAD details, warranties, compliance documents and brochures.", "/technical-library");
+export const metadata: Metadata = pageMetadata("Technical Library", "Request brochures, technical specifications, construction details and application procedures for XNP metal roof protection film.", "/technical-library");
 export const dynamic = "force-dynamic";
 
 type Props = { searchParams: Promise<Record<string, string | undefined>> };
@@ -30,7 +30,7 @@ export default async function TechnicalLibraryPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero eyebrow="Technical Library" title="Downloads for Specification, Installation and Compliance" description="Search technical data sheets, installation guides, CAD details, warranty documents, compliance placeholders and brochures by product category, document type and application." />
+      <PageHero eyebrow="Technical Library" title="Source Documents for Metal Roof Protection Review" description="Request the brochure, technical specification, construction detail atlas and application procedure for the XNP self-fusing film system." />
       <Section>
         <FilterPanel filters={[
           { name: "category", label: "Product category", options: productCategories },

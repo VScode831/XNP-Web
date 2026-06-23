@@ -26,14 +26,14 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <>
-      <PageHero eyebrow={`${project.sector} · ${project.location}`} title={project.name} description={project.overview}>
+      <PageHero eyebrow={`${project.sector} / ${project.location}`} title={project.name} description={project.overview}>
         <div className="relative min-h-[280px] overflow-hidden rounded-sm border border-black/10">
           <Image src={project.images[0]} alt="" fill className="object-cover" />
         </div>
       </PageHero>
-      <Section title="Project Story">
+      <Section title="Application Example">
         <div className="grid gap-5 md:grid-cols-3">
-          {[["Challenge", project.challenge], ["Solution", project.solution], ["Result", project.result]].map(([title, text]) => (
+          {[["Challenge", project.challenge], ["System approach", project.solution], ["Review outcome", project.result]].map(([title, text]) => (
             <article key={title} className="rounded-sm border border-black/10 bg-white p-5 shadow-soft">
               <h2 className="font-semibold">{title}</h2>
               <p className="mt-3 text-sm leading-6 text-ink/66">{text}</p>
@@ -41,12 +41,12 @@ export default async function ProjectDetailPage({ params }: Props) {
           ))}
         </div>
       </Section>
-      <Section title="Products Used" tone="white">
+      <Section title="Product Referenced" tone="white">
         <div className="grid gap-5 md:grid-cols-3">
           {usedProducts.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
       </Section>
-      <Section title="Discuss a Similar Project" tone="dark">
+      <Section title="Discuss a Similar Roof" tone="dark">
         <ContactForm defaultType="Technical support" />
       </Section>
     </>

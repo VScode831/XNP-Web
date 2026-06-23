@@ -7,10 +7,20 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
   "Rhinora",
-  "Construction material systems for New Zealand projects, including waterproofing membranes, roof protection, insulation, drainage, sealants and building envelope materials."
+  "Rhinora supplies XNP/Xiniupi self-fusing metal roof protection film for New Zealand roof renewal projects."
 );
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const footerNav = [
+    ["System", "/system"],
+    ["Product", "/products"],
+    ["Technical Library", "/technical-library"],
+    ["Projects", "/projects"],
+    ["Resources", "/resources"],
+    ["About", "/about"],
+    ["Contact", "/contact"]
+  ];
+
   return (
     <html lang="en-NZ">
       <body>
@@ -23,17 +33,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 Rhinora
               </Link>
               <p className="mt-4 max-w-md text-sm leading-6 text-white/72">
-                Technical construction material systems for New Zealand roofs, decks, below-ground areas and building envelope interfaces.
+                NZ-facing supplier and technical contact for XNP/Xiniupi self-fusing metal roof protection film.
               </p>
             </div>
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-sand">Navigation</h2>
               <div className="mt-4 grid gap-2 text-sm text-white/75">
-                {["Solutions", "Products", "Technical Library", "Projects", "Resources", "About", "Contact"].map((item) => (
-                  <Link key={item} href={`/${item.toLowerCase().replace("technical library", "technical-library")}`}>
-                    {item}
-                  </Link>
-                ))}
+                {footerNav.map(([item, href]) => <Link key={item} href={href}>{item}</Link>)}
               </div>
             </div>
             <div>
@@ -46,7 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
           </div>
           <div className="border-t border-white/10 px-5 py-4 text-center text-xs text-white/55">
-            © 2026 Rhinora. Placeholder content for a scalable full-stack website build.
+            (c) 2026 Rhinora. NZ distributor information for XNP/Xiniupi metal roof protection technology.
           </div>
         </footer>
       </body>

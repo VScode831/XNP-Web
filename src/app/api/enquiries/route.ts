@@ -13,7 +13,8 @@ export async function POST(request: Request) {
   try {
     const enquiry = await createEnquiry(body);
     return NextResponse.json({ enquiry }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Unable to store enquiry", error);
     return NextResponse.json({ error: "Unable to store enquiry" }, { status: 500 });
   }
 }

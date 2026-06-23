@@ -5,7 +5,7 @@ import { Section } from "@/components/site/Section";
 import { getArticles } from "@/lib/contentRepository";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata("Resources", "Articles for designers, architects, builders and developers about waterproofing, roof renewal, compliance, product guidance and installation.", "/resources");
+export const metadata: Metadata = pageMetadata("Resources", "Articles about metal roof renewal, corrosion, leakage, patch repair limits and self-fusing film design considerations.", "/resources");
 export const dynamic = "force-dynamic";
 
 export default async function ResourcesPage() {
@@ -13,7 +13,7 @@ export default async function ResourcesPage() {
 
   return (
     <>
-      <PageHero eyebrow="Resources" title="Technical Articles for Designers, Builders and Developers" description="SEO-ready resource structure for waterproofing, roof renewal, compliance, product guidance and installation tips." />
+      <PageHero eyebrow="Resources" title="Metal Roof Protection Articles" description="Practical guidance for identifying roof renewal timing, understanding patch repair limits and reviewing self-fusing film design considerations." />
       <Section>
         <div className="grid gap-5 md:grid-cols-3">
           {articles.map((article) => (

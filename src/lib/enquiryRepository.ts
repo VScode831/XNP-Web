@@ -54,3 +54,11 @@ export async function createEnquiry(input: Record<string, unknown>): Promise<Enq
 
   return toEnquiry(enquiry);
 }
+
+export async function listEnquiries(): Promise<Enquiry[]> {
+  const enquiries = await prisma.enquiry.findMany({
+    orderBy: { dateSubmitted: "desc" }
+  });
+
+  return enquiries.map(toEnquiry);
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const siteName = "Rhinora";
-const baseTitle = "Rhinora | Construction Material Systems NZ";
+const baseTitle = "Rhinora | Metal Roof Protection NZ";
 
 export function pageMetadata(title: string, description: string, path = ""): Metadata {
   const fullTitle = title === siteName ? baseTitle : `${title} | ${siteName}`;
@@ -11,10 +11,10 @@ export function pageMetadata(title: string, description: string, path = ""): Met
     description,
     keywords: [
       "waterproofing membrane NZ",
-      "commercial waterproofing",
-      "roof protection",
-      "building envelope materials",
-      "technical construction products"
+      "metal roof protection",
+      "metal roof renewal",
+      "self-fusing film",
+      "roof corrosion protection"
     ],
     alternates: {
       canonical: path

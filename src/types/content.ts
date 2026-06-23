@@ -1,29 +1,23 @@
 export type Status = "draft" | "published";
 
 export type ProductCategory =
-  | "Waterproofing Membranes"
-  | "Roof Protection Systems"
-  | "Insulation & Warm Roof Components"
-  | "Drainage & Accessories"
-  | "Sealants & Primers"
-  | "Future Construction Materials";
+  | "Metal Roof Protection Film"
+  | "Detailing & Sealing"
+  | "Technical Documents";
 
 export type Application =
-  | "Flat roof"
-  | "Deck and balcony"
-  | "Below ground"
-  | "Roof renewal"
-  | "Green roof"
-  | "Solar roof"
-  | "Facade"
-  | "General construction";
+  | "Metal roof renewal"
+  | "Gutters and valleys"
+  | "Ridges and eaves"
+  | "Parapets"
+  | "Penetrations"
+  | "Industrial roofs";
 
 export type DocumentType =
   | "Technical data sheet"
   | "Installation guide"
-  | "CAD detail"
-  | "Warranty document"
-  | "Compliance document"
+  | "Construction detail"
+  | "Application procedure"
   | "Brochure";
 
 export type Sector = "commercial" | "residential" | "industrial" | "education" | "healthcare";
@@ -93,7 +87,7 @@ export type Article = {
   id: string;
   title: string;
   slug: string;
-  category: "waterproofing" | "roof renewal" | "compliance" | "product guidance" | "installation tips";
+  category: "metal roof renewal" | "product guidance" | "installation guidance";
   excerpt: string;
   body: string;
   seoTitle: string;

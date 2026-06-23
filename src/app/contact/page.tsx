@@ -5,12 +5,12 @@ import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata("Contact", "Contact Rhinora for general enquiries, technical support, product enquiries and future installer or applicator support.", "/contact");
+export const metadata: Metadata = pageMetadata("Contact", "Contact Rhinora for XNP metal roof protection film enquiries, technical review and document requests.", "/contact");
 
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow="Contact" title="Talk to Rhinora About Products, Systems or Technical Support" description="Use the enquiry form for general questions, technical support, product availability or future installer and applicator support." />
+      <PageHero eyebrow="Contact" title="Talk to Rhinora About Metal Roof Protection" description="Use the enquiry form for product information, roof condition review, technical documents or project support." />
       <Section>
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <aside className="rounded-sm border border-black/10 bg-white p-5 shadow-soft">
@@ -21,8 +21,8 @@ export default function ContactPage() {
               <span className="flex items-center gap-2"><Mail size={17} /> technical@rhinora.co.nz</span>
             </div>
             <div className="mt-8 rounded-sm bg-forest-50 p-4">
-              <h3 className="font-semibold">Find an installer/applicator</h3>
-              <p className="mt-2 text-sm leading-6 text-ink/65">Placeholder for a future installer network or approved applicator search.</p>
+              <h3 className="font-semibold">What to send</h3>
+              <p className="mt-2 text-sm leading-6 text-ink/65">Include roof photos, substrate condition, leak locations, roof age and the documents you need for review.</p>
             </div>
           </aside>
           <ContactForm />

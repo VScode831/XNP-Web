@@ -6,8 +6,8 @@ import type { Product } from "@/types/content";
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.slug}`} className="group grid overflow-hidden rounded-sm border border-black/10 bg-white shadow-soft transition hover:-translate-y-0.5">
-      <div className="relative h-40 bg-forest-50">
-        <Image src={product.image} alt="" fill className="object-cover" />
+      <div className="relative aspect-[4/3] bg-white">
+        <Image src={product.image} alt="" fill className="object-contain" />
       </div>
       <div className="p-5">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-forest-700">{product.category}</p>

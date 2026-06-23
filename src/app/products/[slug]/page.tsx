@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return {};
-  return pageMetadata(product.name, `${product.shortDescription} Product information for New Zealand construction projects.`, `/products/${slug}`);
+  return pageMetadata(product.name, `${product.shortDescription} Product information for NZ metal roof protection projects.`, `/products/${slug}`);
 }
 
 export default async function ProductDetailPage({ params }: Props) {
@@ -75,7 +75,7 @@ export default async function ProductDetailPage({ params }: Props) {
           ))}
         </div>
       </Section>
-      <Section title="Compliance & Certification Placeholders" tone="white">
+      <Section title="Standards and Review Notes" tone="white">
         <div className="grid gap-3 md:grid-cols-2">
           {product.compliance.map((item) => <div key={item} className="rounded-sm border border-black/10 p-4 text-sm font-semibold">{item}</div>)}
         </div>
@@ -85,20 +85,22 @@ export default async function ProductDetailPage({ params }: Props) {
           {documents.map((document) => <DocumentCard key={document.id} document={document} />)}
         </div>
       </Section>
-      <Section title="Related Solutions" tone="white">
+      <Section title="Related System" tone="white">
         <div className="grid gap-3 md:grid-cols-3">
           {relatedSolutions.map((solution) => (
-            <Link key={solution.id} href={`/solutions/${solution.slug}`} className="rounded-sm border border-black/10 p-4 font-semibold hover:bg-forest-50">
+            <Link key={solution.id} href={`/system/${solution.slug}`} className="rounded-sm border border-black/10 p-4 font-semibold hover:bg-forest-50">
               {solution.title}
             </Link>
           ))}
         </div>
       </Section>
-      <Section title="Related Products">
-        <div className="grid gap-5 md:grid-cols-3">
-          {relatedProducts.map((related) => <ProductCard key={related.id} product={related} />)}
-        </div>
-      </Section>
+      {relatedProducts.length > 0 && (
+        <Section title="Related Products">
+          <div className="grid gap-5 md:grid-cols-3">
+            {relatedProducts.map((related) => <ProductCard key={related.id} product={related} />)}
+          </div>
+        </Section>
+      )}
       <Section title="Product Enquiry" tone="dark">
         <div className="mb-5"><ButtonLink href="/contact" variant="secondary">Open Contact Page</ButtonLink></div>
         <ContactForm defaultType="Product enquiry" relatedProduct={product.name} />
