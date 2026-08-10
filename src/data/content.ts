@@ -30,7 +30,7 @@ export const solutions: Solution[] = [
     slug: "metal-roof-protection-system",
     summary: "A self-fusing film system for renewing exposed metal roofs affected by leakage, corrosion and heat.",
     overview:
-      "Rhinora supplies XNP/Xiniupi self-fusing functional film as a metal roof protection system for exposed architectural metal surfaces. The system is designed to create a continuous adhered protective layer over sound metal substrates and vulnerable roof details.",
+      "Rhinora provides the XNP/Xiniupi self-fusing functional film as a specialist waterproofing system for exposed architectural metal roofs. The system is designed to create a continuous adhered protective layer over sound metal substrates and vulnerable roof details.",
     applications: ["Industrial metal roofs", "Ridge and eaves detailing", "Gutters and valleys", "Parapets and upstands", "Pipe penetrations and fastener zones"],
     recommendedProductIds: ["xnp-self-fusing-metal-roof-protection-film"],
     layers: [
@@ -60,7 +60,7 @@ export const products: Product[] = [
     category: "Metal Roof Protection Film",
     shortDescription: "PVDF/PET faced self-fusing functional film for exposed architectural metal roof protection.",
     description:
-      "A weather-resistant functional film composed of a PVDF/PET facing, a self-fusing modified butyl rubber sealing layer and a release film. Rhinora presents the XNP/Xiniupi film as a NZ-facing distributor product for metal roof renewal and protection projects.",
+      "A weather-resistant functional film composed of a PVDF/PET facing, a self-fusing modified butyl rubber sealing layer and a release film. Rhinora provides the XNP/Xiniupi film as the core product in a system-led metal roof renewal and waterproofing pathway for New Zealand projects.",
     applications: ["Metal roof renewal", "Gutters and valleys", "Ridges and eaves", "Parapets", "Penetrations", "Industrial roofs"],
     benefits: [
       "Designed to help prevent water, vapour, oxygen, acid, alkali and salt exposure from reaching the metal substrate",

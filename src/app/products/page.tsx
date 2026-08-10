@@ -7,7 +7,7 @@ import { getApplications, getProductCategories, getProducts } from "@/lib/conten
 import { includesText } from "@/lib/filters";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata("Product", "XNP self-fusing metal roof protection film supplied by Rhinora for NZ project review.", "/products");
+export const metadata: Metadata = pageMetadata("Product", "Review the XNP self-fusing metal roof protection film used in Rhinora's featured waterproofing system.", "/products");
 export const dynamic = "force-dynamic";
 
 type Props = { searchParams: Promise<Record<string, string | undefined>> };
@@ -27,7 +27,7 @@ export default async function ProductsPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero eyebrow="Product" title="XNP Self-Fusing Metal Roof Protection Film" description="Review the core film product used in the Rhinora metal roof protection system." />
+      <PageHero eyebrow="Featured System Product" title="XNP Self-Fusing Metal Roof Protection Film" description="Review the core film product used in Rhinora's current specialist metal roof waterproofing system." />
       <Section>
         <FilterPanel filters={[{ name: "category", label: "Category", options: productCategories }, { name: "application", label: "Application", options: applications }]} />
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

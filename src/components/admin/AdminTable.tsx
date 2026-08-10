@@ -1,14 +1,46 @@
 "use client";
 
 import { Edit3, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Row = Record<string, string | number | undefined>;
+type AdminTableProps = { title: string; rows: Row[]; columns: string[]; resource: string };
 const longFields = new Set(["message", "metaDescription", "shortDescription", "summary"]);
 
-export function AdminTable({ title, rows, columns }: { title: string; rows: Row[]; columns: string[]; resource: string }) {
+export function AdminTable(props: AdminTableProps) {
+  return <AdminTableContent key={JSON.stringify(props.rows)} {...props} />;
+}
+
+function AdminTableContent({ title, rows, columns, resource }: AdminTableProps) {
+  const router = useRouter();
   const [items, setItems] = useState(rows);
   const [editing, setEditing] = useState<Row | null>(null);
+
+  useEffect(() => {
+    if (resource !== "enquiries") {
+      return;
+    }
+
+    function refreshEnquiries() {
+      router.refresh();
+    }
+
+    window.addEventListener("enquiries:created", refreshEnquiries);
+
+    if (!("BroadcastChannel" in window)) {
+      return () => window.removeEventListener("enquiries:created", refreshEnquiries);
+    }
+
+    const channel = new BroadcastChannel("enquiries");
+    channel.addEventListener("message", refreshEnquiries);
+
+    return () => {
+      window.removeEventListener("enquiries:created", refreshEnquiries);
+      channel.removeEventListener("message", refreshEnquiries);
+      channel.close();
+    };
+  }, [resource, router]);
 
   function remove(index: number) {
     setItems((current) => current.filter((_, itemIndex) => itemIndex !== index));

@@ -33,23 +33,45 @@ export default async function Home() {
   return (
     <>
       <section className="relative overflow-hidden border-b border-black/10 bg-white">
-        <div className="mx-auto grid min-h-[680px] max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-8">
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] bg-forest-900 lg:block" />
+        <div className="pointer-events-none absolute left-[-8rem] top-[-10rem] h-80 w-80 rounded-full bg-forest-100/70 blur-3xl" />
+        <div className="mx-auto grid min-h-[680px] max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
           <div className="relative z-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-forest-700">Rhinora NZ distributor for XNP/Xiniupi technology</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-forest-700">Waterproofing systems for New Zealand</p>
             <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-tight text-ink md:text-6xl">
-              Metal Roof Protection for Leaking, Corroding and Overheating Roofs
+              Waterproofing Systems for New Zealand Buildings
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/68">
-              Rhinora supplies XNP self-fusing functional film as a system-led protection pathway for sound architectural metal roofs that need more than repeated patch repairs.
+              Rhinora provides system-led waterproofing solutions for the New Zealand market, helping specifiers, contractors and asset owners move from technical review to a practical project pathway.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/system">View System</ButtonLink>
-              <ButtonLink href="/products" variant="secondary">View Product</ButtonLink>
-              <ButtonLink href="/technical-library" variant="ghost">Review Documents</ButtonLink>
+              <ButtonLink href="/system">Explore Our Systems</ButtonLink>
+              <ButtonLink href="/contact" variant="secondary">Discuss a Project</ButtonLink>
+              <ButtonLink href="/technical-library" variant="ghost">Technical Library</ButtonLink>
             </div>
           </div>
-          <div className="relative min-h-[420px] overflow-hidden rounded-sm border border-black/10 bg-white shadow-soft">
-            <Image src="/images/xnp-pm-rolls.png" alt="XNP metal roof protection membrane rolls" fill priority className="object-contain" />
+          <div className="relative z-10 min-h-[440px] overflow-hidden rounded-sm border border-white/20 bg-white shadow-soft">
+            <Image src="/images/metal-roof-protection-system-photo.png" alt="Waterproofing film applied over an architectural metal roof profile" fill priority className="object-cover" />
+            <div className="absolute inset-x-4 bottom-4 border border-white/20 bg-ink/90 p-5 text-white backdrop-blur-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sand">Featured specialist system</p>
+              <p className="mt-2 text-lg font-semibold">XNP self-fusing metal roof protection</p>
+              <p className="mt-1 text-sm leading-6 text-white/70">A continuous, detail-led renewal pathway for sound metal roof substrates.</p>
+            </div>
+          </div>
+        </div>
+        <div className="relative z-10 border-t border-black/10 bg-[#f7f6f1]">
+          <div className="mx-auto grid max-w-7xl divide-y divide-black/10 px-5 md:grid-cols-3 md:divide-x md:divide-y-0 lg:px-8">
+            {[
+              ["01", "Understand the building", "Review the substrate, exposure, failure points and project constraints."],
+              ["02", "Select the system", "Match the waterproofing approach to the condition and intended outcome."],
+              ["03", "Support delivery", "Provide clear technical information for detailing, application and review."]
+            ].map(([number, title, text]) => (
+              <div key={number} className="py-6 md:px-6 md:first:pl-0 md:last:pr-0">
+                <p className="text-xs font-bold tracking-[0.16em] text-clay">{number}</p>
+                <h2 className="mt-2 font-semibold text-ink">{title}</h2>
+                <p className="mt-2 text-sm leading-6 text-ink/64">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -65,7 +87,7 @@ export default async function Home() {
         </div>
       </Section>
 
-      <Section title="Featured System" tone="white" description="One launch system, presented clearly instead of a broad catalogue of unrelated product categories.">
+      <Section title="Our Featured Waterproofing System" tone="white" description="Rhinora's current specialist offering addresses metal roof leakage, corrosion and vulnerable details through one coordinated protection method.">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {systems.map((system) => <SolutionCard key={system.id} solution={system} />)}
         </div>
@@ -111,8 +133,8 @@ export default async function Home() {
       <Section tone="dark">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div>
-            <h2 className="text-3xl font-bold">Start with roof condition, then choose the protection method.</h2>
-            <p className="mt-3 max-w-2xl text-white/70">Send roof photos, substrate condition, leak locations and document requirements. Rhinora can help frame the next technical review.</p>
+            <h2 className="text-3xl font-bold">Start with the waterproofing problem, not a product list.</h2>
+            <p className="mt-3 max-w-2xl text-white/70">Share the building condition, leak locations, substrate information and project priorities. Rhinora can help frame the right technical review and next step.</p>
           </div>
           <ButtonLink href="/contact" variant="secondary">Contact Rhinora</ButtonLink>
         </div>

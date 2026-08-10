@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { createEnquiry } from "@/lib/enquiryRepository";
 
 export async function POST(request: Request) {
@@ -12,6 +13,8 @@ export async function POST(request: Request) {
 
   try {
     const enquiry = await createEnquiry(body);
+    revalidatePath("/admin");
+    revalidatePath("/admin/enquiries");
     return NextResponse.json({ enquiry }, { status: 201 });
   } catch (error) {
     console.error("Unable to store enquiry", error);

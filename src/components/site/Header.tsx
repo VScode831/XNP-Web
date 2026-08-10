@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 const navItems = [
   { href: "/system", label: "System" },
@@ -22,9 +23,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-[#fbfaf6]/95 backdrop-blur">
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid h-10 w-10 place-items-center rounded-sm bg-forest-700 text-lg font-bold text-white">R</span>
-          <span className="block text-2xl font-bold tracking-tight text-ink">Rhinora</span>
+        <Link href="/" onClick={() => setOpen(false)} aria-label="Rhinora home">
+          <BrandLogo priority />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink/72 lg:flex">
           {navItems.map((item) => {
@@ -44,8 +44,8 @@ export function Header() {
             );
           })}
         </nav>
-        <Link href="/admin" className="hidden rounded-sm border border-forest-700 px-4 py-2 text-sm font-semibold text-forest-700 hover:bg-forest-700 hover:text-white lg:inline-flex">
-          Admin
+        <Link href="/contact" className="hidden rounded-sm border border-forest-700 px-4 py-2 text-sm font-semibold text-forest-700 transition hover:bg-forest-700 hover:text-white lg:inline-flex">
+          Discuss a project
         </Link>
         <button className="focus-ring rounded-sm p-2 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Toggle navigation">
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -59,8 +59,8 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/admin" onClick={() => setOpen(false)} className="rounded-sm bg-forest-700 px-4 py-2 text-center font-semibold text-white">
-              Admin
+            <Link href="/contact" onClick={() => setOpen(false)} className="rounded-sm bg-forest-700 px-4 py-2 text-center font-semibold text-white">
+              Discuss a project
             </Link>
           </nav>
         </div>

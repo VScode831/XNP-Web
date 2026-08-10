@@ -10,19 +10,38 @@ type ContactFormProps = {
   relatedSolution?: string;
 };
 
+function announceEnquiryCreated() {
+  window.dispatchEvent(new Event("enquiries:created"));
+
+  if ("BroadcastChannel" in window) {
+    const channel = new BroadcastChannel("enquiries");
+    channel.postMessage("created");
+    channel.close();
+  }
+}
+
 export function ContactForm({ defaultType = "General", relatedProduct, relatedSolution }: ContactFormProps) {
-  const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("idle");
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    setStatus("sending");
+    const formData = new FormData(form);
     const response = await fetch("/api/enquiries", {
       method: "POST",
       body: JSON.stringify(Object.fromEntries(formData)),
       headers: { "Content-Type": "application/json" }
     });
-    setStatus(response.ok ? "sent" : "error");
+
+    if (response.ok) {
+      form.reset();
+      announceEnquiryCreated();
+      setStatus("sent");
+      return;
+    }
+
+    setStatus("error");
   }
 
   return (
@@ -59,8 +78,8 @@ export function ContactForm({ defaultType = "General", relatedProduct, relatedSo
         Message
         <textarea required name="message" rows={5} className="rounded-sm border border-black/15 px-3 py-2 font-normal" />
       </label>
-      <button className="mt-5 inline-flex items-center gap-2 rounded-sm bg-forest-700 px-5 py-3 text-sm font-semibold text-white hover:bg-forest-900">
-        <Send size={16} /> Submit enquiry
+      <button disabled={status === "sending"} className="mt-5 inline-flex items-center gap-2 rounded-sm bg-forest-700 px-5 py-3 text-sm font-semibold text-white hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-60">
+        <Send size={16} /> {status === "sending" ? "Submitting..." : "Submit enquiry"}
       </button>
       {status === "sent" && <p className="mt-3 text-sm font-semibold text-forest-700">Enquiry submitted successfully.</p>}
       {status === "error" && <p className="mt-3 text-sm font-semibold text-clay">There was a problem submitting the enquiry.</p>}

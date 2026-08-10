@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
   "System",
-  "XNP self-fusing metal roof protection system supplied by Rhinora for New Zealand roof renewal projects.",
+  "Explore Rhinora's featured XNP self-fusing metal roof waterproofing system for New Zealand roof renewal projects.",
   "/system"
 );
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ export default async function SystemPage() {
   return (
     <>
       <PageHero
-        eyebrow="System"
+        eyebrow="Featured Waterproofing System"
         title="Metal Roof Protection System"
         description="A system-led pathway for renewing sound metal roofs affected by leakage, corrosion, heat and vulnerable detail zones."
       />

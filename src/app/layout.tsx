@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
   "Rhinora",
-  "Rhinora supplies XNP/Xiniupi self-fusing metal roof protection film for New Zealand roof renewal projects."
+  "Rhinora provides system-led waterproofing solutions, technical guidance and project support for the New Zealand market."
 );
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -29,11 +30,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <footer className="border-t border-black/10 bg-ink text-white">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
             <div>
-              <Link href="/" className="text-2xl font-bold tracking-tight">
-                Rhinora
+              <Link
+                href="/"
+                className="inline-block"
+                aria-label="Rhinora home"
+              >
+                <BrandLogo inverted />
               </Link>
               <p className="mt-4 max-w-md text-sm leading-6 text-white/72">
-                NZ-facing supplier and technical contact for XNP/Xiniupi self-fusing metal roof protection film.
+                System-led waterproofing solutions, technical guidance and project support for New Zealand buildings.
               </p>
             </div>
             <div>
@@ -52,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
           </div>
           <div className="border-t border-white/10 px-5 py-4 text-center text-xs text-white/55">
-            (c) 2026 Rhinora. NZ distributor information for XNP/Xiniupi metal roof protection technology.
+            (c) 2026 Rhinora. Waterproofing systems for the New Zealand market.
           </div>
         </footer>
       </body>
