@@ -27,15 +27,22 @@ export function Header() {
           <span className="block text-2xl font-bold tracking-tight text-ink">Rhinora</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink/72 lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname.startsWith(item.href) ? "text-forest-700" : "hover:text-forest-700"}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname.startsWith(item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`relative py-1 transition-colors duration-200 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-forest-700 after:transition-transform after:duration-200 after:ease-out hover:text-forest-700 hover:after:scale-x-100 focus-visible:text-forest-700 focus-visible:outline-none focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none ${
+                  isActive ? "text-forest-700 after:scale-x-100" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
         <Link href="/admin" className="hidden rounded-sm border border-forest-700 px-4 py-2 text-sm font-semibold text-forest-700 hover:bg-forest-700 hover:text-white lg:inline-flex">
           Admin
