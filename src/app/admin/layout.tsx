@@ -8,7 +8,6 @@ const adminNav = [
   ["Systems", "/admin/solutions"],
   ["Documents", "/admin/documents"],
   ["Projects", "/admin/projects"],
-  ["Resources", "/admin/resources"],
   ["Enquiries", "/admin/enquiries"]
 ];
 

@@ -1,5 +1,4 @@
 import {
-  getArticles,
   getCategories,
   getDocuments,
   getProducts,
@@ -9,7 +8,6 @@ import {
 import { listEnquiries } from "@/lib/enquiryRepository";
 
 export type AdminResource =
-  | "articles"
   | "categories"
   | "documents"
   | "enquiries"
@@ -59,16 +57,6 @@ export async function listAdminRows(resource: AdminResource): Promise<AdminRow[]
       sector: project.sector,
       location: project.location,
       summary: project.summary
-    }));
-  }
-  if (resource === "articles") {
-    return (await getArticles()).map((article) => ({
-      id: article.id,
-      title: article.title,
-      slug: article.slug,
-      category: article.category,
-      seoTitle: article.seoTitle,
-      metaDescription: article.metaDescription
     }));
   }
   if (resource === "categories") {

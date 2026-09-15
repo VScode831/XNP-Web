@@ -1,7 +1,6 @@
 import type { Enquiry } from "@/types/content";
 import {
   applications,
-  articles,
   documentTypes,
   enquiries,
   productCategories,
@@ -53,14 +52,6 @@ export async function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
 
-export async function getArticles() {
-  return [...articles];
-}
-
-export async function getArticleBySlug(slug: string) {
-  return articles.find((article) => article.slug === slug);
-}
-
 export async function getEnquiries() {
   return [...enquiries];
 }
@@ -68,13 +59,7 @@ export async function getEnquiries() {
 export async function getCategories(): Promise<CategoryRow[]> {
   return [
     ...productCategories.map((name) => ({ id: `product-${slugify(name)}`, type: "Product category", name, slug: slugify(name) })),
-    ...solutions.map((solution) => ({ id: `system-${solution.id}`, type: "System", name: solution.title, slug: solution.slug })),
-    ...Array.from(new Set(articles.map((article) => article.category))).map((name) => ({
-      id: `resource-${slugify(name)}`,
-      type: "Resource category",
-      name,
-      slug: slugify(name)
-    }))
+    ...solutions.map((solution) => ({ id: `system-${solution.id}`, type: "System", name: solution.title, slug: solution.slug }))
   ];
 }
 

@@ -1,4 +1,4 @@
-import type { Article, Enquiry, Product, Project, Solution, TechnicalDocument } from "@/types/content";
+import type { Enquiry, Product, Project, Solution, TechnicalDocument } from "@/types/content";
 
 export const productCategories = [
   "Metal Roof Protection Film",
@@ -189,45 +189,6 @@ export const projects: Project[] = [
   }
 ];
 
-export const articles: Article[] = [
-  {
-    id: "metal-roof-maintenance-window",
-    title: "When a Metal Roof Enters Its Maintenance Window",
-    slug: "metal-roof-maintenance-window",
-    category: "metal roof renewal",
-    excerpt: "Early corrosion and repeated leaks should trigger a system review before the roof loses structural value.",
-    body: "Metal roofs commonly move from isolated rust spots to broader corrosion and leakage risk. The XNP source materials frame early intervention as important because severe corrosion can require panel replacement rather than surface protection. A project review should confirm whether the metal substrate is still sound before any film system is specified.",
-    seoTitle: "Metal Roof Maintenance Window | Rhinora",
-    metaDescription: "How to identify when a metal roof needs system-led renewal rather than repeated patch repair.",
-    tags: ["metal roof renewal", "roof corrosion", "roof leak repair"],
-    publishDate: "2026-06-06"
-  },
-  {
-    id: "why-patch-repairs-fail-metal-roofs",
-    title: "Why Patch Repairs Often Fail on Metal Roofs",
-    slug: "why-patch-repairs-fail-metal-roofs",
-    category: "product guidance",
-    excerpt: "Local repairs can leave water tracking, movement and corrosion drivers unresolved.",
-    body: "Metal roof leakage is often tied to movement, rigid laps, fasteners, gutters, penetrations and coating breakdown. Repairing only the visible leak point can leave neighbouring details and hidden water paths active. A system-led method treats the prepared roof surface and details together so the protective layer is continuous.",
-    seoTitle: "Why Metal Roof Patch Repairs Fail | Rhinora",
-    metaDescription: "A practical explanation of metal roof leakage, corrosion and patch repair limits.",
-    tags: ["metal roof leak", "self-fusing film", "roof protection"],
-    publishDate: "2026-06-06"
-  },
-  {
-    id: "self-fusing-film-design-considerations",
-    title: "Design Considerations for Self-Fusing Roof Film",
-    slug: "self-fusing-film-design-considerations",
-    category: "installation guidance",
-    excerpt: "Substrate condition, overlap width and detail reinforcement determine whether the system can perform as intended.",
-    body: "The application procedure requires the film to be installed directly on prepared metal surfaces using fusion dry-bonding. It also identifies a minimum overlap width of not less than 30 mm and calls for detail reinforcement where project conditions require it. Cement-based substrates use a different adhesive bonding method and should be reviewed separately.",
-    seoTitle: "Self-Fusing Metal Roof Film Design Considerations | Rhinora",
-    metaDescription: "Key design and installation considerations for self-fusing functional film on architectural metal roofs.",
-    tags: ["self-fusing film", "metal roof protection", "roof detailing"],
-    publishDate: "2026-06-06"
-  }
-];
-
 export const enquiries: Enquiry[] = [
   {
     id: "enq-1001",
@@ -257,7 +218,6 @@ export const enquiries: Enquiry[] = [
 export const findProduct = (slug: string) => products.find((product) => product.slug === slug);
 export const findSolution = (slug: string) => solutions.find((solution) => solution.slug === slug);
 export const findProject = (slug: string) => projects.find((project) => project.slug === slug);
-export const findArticle = (slug: string) => articles.find((article) => article.slug === slug);
 
 export const documentsForIds = (ids: string[]) => technicalDocuments.filter((document) => ids.includes(document.id));
 export const productsForIds = (ids: string[]) => products.filter((product) => ids.includes(product.id));

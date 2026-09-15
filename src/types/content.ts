@@ -83,19 +83,6 @@ export type Project = {
   images: string[];
 };
 
-export type Article = {
-  id: string;
-  title: string;
-  slug: string;
-  category: "metal roof renewal" | "product guidance" | "installation guidance";
-  excerpt: string;
-  body: string;
-  seoTitle: string;
-  metaDescription: string;
-  tags: string[];
-  publishDate: string;
-};
-
 export type Enquiry = {
   id: string;
   type: "General" | "Technical support" | "Product enquiry";

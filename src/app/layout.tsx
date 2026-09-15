@@ -17,7 +17,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ["Product", "/products"],
     ["Technical Library", "/technical-library"],
     ["Projects", "/projects"],
-    ["Resources", "/resources"],
     ["About", "/about"],
     ["Contact", "/contact"]
   ];

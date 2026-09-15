@@ -11,7 +11,6 @@ const navItems = [
   { href: "/products", label: "Product" },
   { href: "/technical-library", label: "Technical Library" },
   { href: "/projects", label: "Projects" },
-  { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ];
@@ -26,7 +25,7 @@ export function Header() {
         <Link href="/" onClick={() => setOpen(false)} aria-label="Rhinora home">
           <BrandLogo priority />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-ink/72 lg:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-6 text-sm font-medium text-ink/72 lg:flex">
           {navItems.map((item) => {
             const isActive = pathname.startsWith(item.href);
 
@@ -47,13 +46,19 @@ export function Header() {
         <Link href="/contact" className="hidden rounded-sm border border-forest-700 px-4 py-2 text-sm font-semibold text-forest-700 transition hover:bg-forest-700 hover:text-white lg:inline-flex">
           Discuss a project
         </Link>
-        <button className="focus-ring rounded-sm p-2 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Toggle navigation">
+        <button
+          className="focus-ring rounded-sm p-2 lg:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          aria-label="Toggle navigation"
+        >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
       {open && (
-        <div className="border-t border-black/10 bg-[#fbfaf6] px-5 py-4 lg:hidden">
-          <nav className="grid gap-3 text-sm font-medium text-ink/75">
+        <div id="mobile-navigation" className="border-t border-black/10 bg-[#fbfaf6] px-5 py-4 lg:hidden">
+          <nav aria-label="Mobile navigation" className="grid gap-3 text-sm font-medium text-ink/75">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
                 {item.label}

@@ -1,0 +1,160 @@
+{
+  "summary": {
+    "projectName": "Rhinora Website",
+    "locale": "en",
+    "modelId": "agent-work-loop-v4",
+    "reportContractVersion": 25,
+    "overview": "The project has a usable Next.js command baseline and a clear server-only Prisma boundary, but foundational risk, focused validation, and revision-bound delivery routes are incomplete. This is a session-limited review: no completed Codex Task Episode was eligible in the selected 30-day window, so recent behavior and learning effectiveness remain unobserved.",
+    "dimensions": [
+      {
+        "id": "task-understanding",
+        "label": "Task Understanding",
+        "score": 50,
+        "summary": "Project guidance routes agents to key files, but contradictory and stale runtime statements weaken the authoritative context map.",
+        "findingRefs": [
+          "readme-denies-runtime-database",
+          "agent-guide-contains-conflicting-current-state"
+        ]
+      },
+      {
+        "id": "controlled-execution",
+        "label": "Controlled Execution",
+        "score": 56,
+        "summary": "Development, lint, and build routes are runnable, while database mutation commands lack an explicit environment and approval boundary.",
+        "findingRefs": [
+          "database-commands-lack-safety-boundary"
+        ]
+      },
+      {
+        "id": "change-validation",
+        "label": "Change Validation",
+        "score": 45,
+        "summary": "Lint and build provide fast static feedback, but the database-backed enquiry path has no focused behavior check and an observed malformed-input failure escapes its JSON error contract.",
+        "findingRefs": [
+          "enquiry-path-misses-focused-validation"
+        ]
+      },
+      {
+        "id": "reliable-delivery",
+        "label": "Reliable Delivery",
+        "score": 38,
+        "summary": "The inspected checkout has local validation only; no current-revision acceptance, merge gate, or recovery evidence was available.",
+        "findingRefs": [
+          "delivery-has-no-revision-bound-gate"
+        ]
+      },
+      {
+        "id": "learning-capture",
+        "label": "Learning Capture",
+        "score": 35,
+        "summary": "The bounded Session Evidence lane contained no eligible completed Task Episodes, so recurrence, reusable coverage, and later outcomes cannot be judged.",
+        "findingRefs": []
+      }
+    ],
+    "aiAgentPractice": {
+      "inspectedSurfaces": [
+        "Rules"
+      ],
+      "coverageRows": [
+        {
+          "surface": "Rules",
+          "scopes": [
+            "Project"
+          ],
+          "count": 1,
+          "paths": [
+            "AGENTS.md"
+          ]
+        }
+      ]
+    },
+    "assignmentSummaries": []
+  },
+  "findings": [
+    {
+      "id": "database-commands-lack-safety-boundary",
+      "title": "Database commands have no environment or approval guard",
+      "severity": "High",
+      "reason": "The project guide lists migrate, seed, and Studio commands for a Supabase/Postgres-backed application without telling an agent how to distinguish disposable, development, shared, or production targets, when approval is required, or which commands must never run against shared data. This leaves a repository-documented path from routine agent work to persistent database effects without a pre-action decision boundary.",
+      "dimensionRefs": [
+        "controlled-execution"
+      ],
+      "subdimensionRefs": [
+        "permission-boundary"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nUpdate the canonical project agent guide with the smallest repo-specific database safety contract. Preserve the server-only Prisma rule. State that the target database must be identified before any Prisma migration, seed, or Studio command; require explicit approval before commands that can affect shared or production data; and define the disposable development/test route if one exists. Do not invent credentials, environments, or a reset command.\n\n## Validation\n\n- Inspect the final guide for an explicit pre-action decision and prohibited shared-data path\n- Run `git diff --check`\n- Do not execute a database mutation as part of this documentation repair",
+      "expectedArtifact": "Agent instruction safety rule",
+      "expectedOutput": [
+        "Give agents one explicit environment check, approval boundary, and safe stopping rule before database-changing commands."
+      ]
+    },
+    {
+      "id": "enquiry-path-misses-focused-validation",
+      "title": "Enquiry changes can pass while malformed input breaks the API contract",
+      "severity": "Medium",
+      "reason": "The database-backed enquiry path has no test script or focused test owner for required fields, invalid types, malformed JSON, persistence failure, or success. A bounded malformed-JSON probe produced an unstructured HTTP 500 because request parsing occurs outside the route's error boundary. Lint and production build both pass without exercising this trigger-to-result behavior.",
+      "dimensionRefs": [
+        "change-validation"
+      ],
+      "subdimensionRefs": [
+        "relevant-check"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nAdd the smallest focused regression route for `POST /api/enquiries`. First capture malformed JSON, missing fields, invalid enquiry type, repository failure, and success expectations. Move request parsing inside a bounded JSON error path so malformed input returns the documented structured client-error response. If a new test dependency is required, obtain approval before changing runtime dependencies or the lockfile.\n\n## Validation\n\n- Run the exact focused test command introduced by the change\n- Run `npm.cmd run lint`\n- Run `npm.cmd run build`\n- Confirm malformed JSON returns the asserted structured response without a database write",
+      "expectedArtifact": "Focused enquiry API regression test",
+      "expectedOutput": [
+        "Exercise the enquiry route's negative, recovery, and success boundaries with one repeatable project-owned check."
+      ]
+    },
+    {
+      "id": "delivery-has-no-revision-bound-gate",
+      "title": "Local checks are not tied to a delivery decision",
+      "severity": "Medium",
+      "reason": "The inspected checkout passes lint and build, but the repository exposes no revision-bound acceptance route that connects those results to review, merge, release, or deployment. The local main branch is ahead of its remote and the working tree is dirty, so current local success does not establish that the complete change set was reviewed or accepted at its delivery boundary.",
+      "dimensionRefs": [
+        "reliable-delivery"
+      ],
+      "subdimensionRefs": [
+        "acceptance-evidence"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nDefine the project's real delivery acceptance boundary and make the existing validation commands part of it. Compose `npm.cmd run lint` and `npm.cmd run build` into the smallest project-owned verification route, document the required clean revision and review evidence, and add host automation only after the repository host and permissions are confirmed. Do not push, change branch protection, or create external workflows without separate authority.\n\n## Validation\n\n- Run `npm.cmd run lint`\n- Run `npm.cmd run build`\n- Confirm the documented acceptance result is bound to one revision and target",
+      "expectedArtifact": "Revision-bound acceptance contract",
+      "expectedOutput": [
+        "Connect the existing checks to a named review or merge decision for the exact revision being delivered."
+      ]
+    },
+    {
+      "id": "readme-denies-runtime-database",
+      "title": "Setup guidance says the runtime database is unnecessary",
+      "severity": "Medium",
+      "reason": "The README says no local database is required, contact submissions are fixture-backed, and the website does not connect to a database at runtime. The inspected enquiry route imports the Prisma-backed repository and calls `prisma.enquiry.create`, so a fresh agent can follow the setup guide while missing the required `DATABASE_URL` and database availability for the contact workflow.",
+      "dimensionRefs": [
+        "task-understanding"
+      ],
+      "subdimensionRefs": [
+        "relevant-context"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nCorrect `README.md` so it distinguishes fixture-backed catalogue content from Prisma/Postgres-backed enquiry submission. Document the required server-side `DATABASE_URL`, keep credentials out of the file, and state which routes can run without database access. Preserve the existing Windows `npm.cmd` guidance.\n\n## Validation\n\n- Compare the final README statements with `src/app/api/enquiries/route.ts` and `src/lib/enquiryRepository.ts`\n- Run `npm.cmd run build`\n- Confirm no secret value or production endpoint was added",
+      "expectedArtifact": "Accurate runtime setup guide",
+      "expectedOutput": [
+        "Let a fresh agent identify the database-dependent route and its environment prerequisite without exposing credentials."
+      ]
+    },
+    {
+      "id": "agent-guide-contains-conflicting-current-state",
+      "title": "The root agent guide gives two different latest commits",
+      "severity": "Low",
+      "reason": "The 89-line project guide says `0b53d7a` is the current latest commit in one section and later says local main contains `67992a8`. The same root context also carries conversation history, completed work, and other volatile status. This duplicated current-state narrative has already drifted and can route agents from incompatible baselines.",
+      "dimensionRefs": [
+        "task-understanding"
+      ],
+      "subdimensionRefs": [
+        "relevant-context"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nMake `AGENTS.md` the lean canonical owner for stable commands, safety rules, and task routing. Remove duplicated commit and conversation status from the root guide, retain the early server-only Prisma boundary, and route volatile handoff state to one clearly named project document only if the project wants to maintain it. Use the conventional `AGENTS.md` filename for portable discovery.\n\n## Validation\n\n- Confirm the root guide contains one stable source of truth and no conflicting current-commit claim\n- Run `git diff --check`\n- Verify any linked handoff owner exists and does not duplicate stable policy",
+      "expectedArtifact": "Progressively disclosed agent guide",
+      "expectedOutput": [
+        "Keep always-needed project policy in the root guide and move volatile status out of the default context."
+      ]
+    }
+  ]
+}

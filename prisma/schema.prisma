@@ -82,22 +82,6 @@ model Project {
   products  ProjectProduct[]
 }
 
-model Article {
-  id              String   @id
-  title           String
-  slug            String   @unique
-  category        String
-  excerpt         String   @db.Text
-  body            String   @db.Text
-  seoTitle        String
-  metaDescription String   @db.Text
-  tags            Json
-  publishDate     DateTime
-  sortOrder       Int      @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
 model Category {
   id        String   @id
   type      String

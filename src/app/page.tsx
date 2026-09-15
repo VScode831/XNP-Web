@@ -32,46 +32,30 @@ export default async function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/10 bg-white">
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] bg-forest-900 lg:block" />
-        <div className="pointer-events-none absolute left-[-8rem] top-[-10rem] h-80 w-80 rounded-full bg-forest-100/70 blur-3xl" />
-        <div className="mx-auto grid min-h-[680px] max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
-          <div className="relative z-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-forest-700">Waterproofing systems for New Zealand</p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-tight text-ink md:text-6xl">
+      <section className="relative overflow-hidden border-b border-black/15 bg-[#071e16] text-white">
+        <Image
+          src="/images/auckland-skyline-hero.jpg"
+          alt="Auckland skyline and Sky Tower across the Waitemata Harbour"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[52%_center]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[#071e16]/60 md:bg-[linear-gradient(90deg,rgba(5,29,21,0.84)_0%,rgba(5,29,21,0.68)_48%,rgba(5,29,21,0.2)_78%,rgba(5,29,21,0.04)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(4,24,18,0.24)_0%,transparent_46%,rgba(4,24,18,0.08)_100%)]" />
+        <div className="mx-auto flex min-h-[640px] max-w-7xl items-center px-5 py-20 md:min-h-[680px] lg:px-8">
+          <div className="relative z-10 max-w-5xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f1ddb2] [text-shadow:0_2px_10px_rgba(0,0,0,0.38)]">Waterproofing systems for New Zealand</p>
+            <h1 className="mt-5 max-w-5xl text-5xl font-bold tracking-tight text-white [text-shadow:0_3px_24px_rgba(0,0,0,0.46)] md:text-6xl lg:text-7xl">
               Waterproofing Systems for New Zealand Buildings
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/68">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/90 [text-shadow:0_2px_14px_rgba(0,0,0,0.45)]">
               Rhinora provides system-led waterproofing solutions for the New Zealand market, helping specifiers, contractors and asset owners move from technical review to a practical project pathway.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/system">Explore Our Systems</ButtonLink>
-              <ButtonLink href="/contact" variant="secondary">Discuss a Project</ButtonLink>
-              <ButtonLink href="/technical-library" variant="ghost">Technical Library</ButtonLink>
+              <ButtonLink href="/system" variant="light">Explore Our Systems</ButtonLink>
+              <ButtonLink href="/contact" variant="outlineLight">Discuss a Project</ButtonLink>
             </div>
-          </div>
-          <div className="relative z-10 min-h-[440px] overflow-hidden rounded-sm border border-white/20 bg-white shadow-soft">
-            <Image src="/images/metal-roof-protection-system-photo.png" alt="Waterproofing film applied over an architectural metal roof profile" fill priority className="object-cover" />
-            <div className="absolute inset-x-4 bottom-4 border border-white/20 bg-ink/90 p-5 text-white backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sand">Featured specialist system</p>
-              <p className="mt-2 text-lg font-semibold">XNP self-fusing metal roof protection</p>
-              <p className="mt-1 text-sm leading-6 text-white/70">A continuous, detail-led renewal pathway for sound metal roof substrates.</p>
-            </div>
-          </div>
-        </div>
-        <div className="relative z-10 border-t border-black/10 bg-[#f7f6f1]">
-          <div className="mx-auto grid max-w-7xl divide-y divide-black/10 px-5 md:grid-cols-3 md:divide-x md:divide-y-0 lg:px-8">
-            {[
-              ["01", "Understand the building", "Review the substrate, exposure, failure points and project constraints."],
-              ["02", "Select the system", "Match the waterproofing approach to the condition and intended outcome."],
-              ["03", "Support delivery", "Provide clear technical information for detailing, application and review."]
-            ].map(([number, title, text]) => (
-              <div key={number} className="py-6 md:px-6 md:first:pl-0 md:last:pr-0">
-                <p className="text-xs font-bold tracking-[0.16em] text-clay">{number}</p>
-                <h2 className="mt-2 font-semibold text-ink">{title}</h2>
-                <p className="mt-2 text-sm leading-6 text-ink/64">{text}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

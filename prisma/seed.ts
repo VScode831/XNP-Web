@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import {
-  articles,
   enquiries,
   productCategories,
   products,
@@ -8,7 +7,55 @@ import {
   solutions,
   technicalDocuments
 } from "../src/data/content";
-import { unique } from "../src/lib/filters";
+
+function assertSafeSeedTarget() {
+  const seedEnvironment = process.env.SEED_ENVIRONMENT?.trim().toLowerCase();
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Database seeding is disabled when NODE_ENV is production.");
+  }
+
+  if (seedEnvironment !== "development" && seedEnvironment !== "test") {
+    throw new Error("Set SEED_ENVIRONMENT to development or test before running the destructive seed.");
+  }
+
+  if (process.env.ALLOW_DESTRUCTIVE_SEED !== "true") {
+    throw new Error("Set ALLOW_DESTRUCTIVE_SEED=true to acknowledge that seeding deletes existing records.");
+  }
+
+  const databaseUrl = process.env.DATABASE_URL;
+  const expectedIdentity = process.env.SEED_TARGET_IDENTITY?.trim();
+
+  if (!databaseUrl || !expectedIdentity) {
+    throw new Error("DATABASE_URL and SEED_TARGET_IDENTITY are required to identify the seed target.");
+  }
+
+  let target: URL;
+  try {
+    target = new URL(databaseUrl);
+  } catch {
+    throw new Error("DATABASE_URL must be a valid PostgreSQL connection URL before seeding.");
+  }
+
+  if (target.protocol !== "postgres:" && target.protocol !== "postgresql:") {
+    throw new Error("Database seeding is allowed only for an identified PostgreSQL target.");
+  }
+
+  const databaseName = decodeURIComponent(target.pathname.replace(/^\/+/, "")).split("/")[0];
+  const databaseUser = decodeURIComponent(target.username);
+  const databasePort = target.port || "5432";
+
+  if (!databaseName || !databaseUser) {
+    throw new Error("DATABASE_URL does not identify both a database and database user.");
+  }
+
+  const actualIdentity = `${databaseUser}@${target.hostname}:${databasePort}/${databaseName}`;
+  if (actualIdentity !== expectedIdentity) {
+    throw new Error("SEED_TARGET_IDENTITY does not match DATABASE_URL. Refusing to delete data.");
+  }
+}
+
+assertSafeSeedTarget();
 
 const prisma = new PrismaClient();
 
@@ -29,7 +76,6 @@ async function main() {
   await prisma.productSolution.deleteMany();
   await prisma.enquiry.deleteMany();
   await prisma.category.deleteMany();
-  await prisma.article.deleteMany();
   await prisma.project.deleteMany();
   await prisma.technicalDocument.deleteMany();
   await prisma.solution.deleteMany();
@@ -116,26 +162,6 @@ async function main() {
     )
   );
 
-  await Promise.all(
-    articles.map((article, sortOrder) =>
-      prisma.article.create({
-        data: {
-          id: article.id,
-          title: article.title,
-          slug: article.slug,
-          category: article.category,
-          excerpt: article.excerpt,
-          body: article.body,
-          seoTitle: article.seoTitle,
-          metaDescription: article.metaDescription,
-          tags: article.tags,
-          publishDate: date(article.publishDate),
-          sortOrder
-        }
-      })
-    )
-  );
-
   const categoryRows = [
     ...productCategories.map((name, sortOrder) => ({
       id: `product-${slugify(name)}`,
@@ -149,13 +175,6 @@ async function main() {
       type: "Solution category",
       name: solution.title,
       slug: solution.slug,
-      sortOrder
-    })),
-    ...unique(articles.map((article) => article.category)).map((name, sortOrder) => ({
-      id: `resource-${slugify(name)}`,
-      type: "Resource category",
-      name,
-      slug: slugify(name),
       sortOrder
     }))
   ];

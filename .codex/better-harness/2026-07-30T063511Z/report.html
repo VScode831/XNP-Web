@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="better-harness codex-html">
+  <title>Harness Insights · XNP Website</title>
+  <style>
+    :root { color-scheme: dark; --bg:#111315; --panel:#1a1d20; --panel-2:#21252a; --line:#31363d; --text:#f5f7fa; --muted:#9aa3ad; --blue:#6cb8ff; --blue-2:#1b6ca8; --orange:#ff9a5a; --green:#53d69b; --red:#ff6b6b; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); scroll-behavior:smooth; }
+    body { margin:0; min-width:320px; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 12% -10%,#22364a 0,transparent 34rem),var(--bg); line-height:1.55; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:28px 28px; }
+    main { position:relative; width:min(1180px,calc(100% - 40px)); margin:0 auto; padding:52px 0 88px; }
+    h1,h2,h3,p { margin-top:0; }
+    .eyebrow,.label { color:var(--blue); font-size:12px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; }
+    .hero { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:36px; align-items:end; min-height:270px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(36,43,51,.96),rgba(21,24,27,.94)); box-shadow:0 28px 70px rgba(0,0,0,.28); }
+    .hero h1 { margin:12px 0 10px; font-size:clamp(42px,7vw,82px); line-height:.96; letter-spacing:-.055em; }
+    .hero p { max-width:760px; margin-bottom:22px; color:#c9d0d8; font-size:18px; }
+    .hero-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .score-orbit { width:174px; aspect-ratio:1; display:grid; place-content:center; text-align:center; border:14px solid #343a41; border-top-color:var(--blue); border-right-color:var(--blue-2); border-radius:50%; background:#1a2026; box-shadow:inset 0 0 0 1px var(--line); }
+    .score-orbit strong { font-size:44px; line-height:1; }
+    .score-orbit span { width:110px; margin-top:7px; color:var(--muted); font-size:12px; }
+    .pill { display:inline-flex; align-items:center; min-height:26px; padding:3px 10px; border-radius:999px; color:#d4dae0; background:#30353b; font-size:12px; font-weight:700; }
+    .pill.accent { color:#c9e8ff; background:#164e75; }.pill.good { color:#c9f9e5; background:#165c43; }.pill.warning { color:#ffe1c8; background:#754322; }.pill.danger { color:#ffd4d4; background:#762e31; }.pill.muted,.pill.neutral { color:#c8cdd3; background:#34383d; }
+    .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:18px 0 54px; }
+    .metric { min-height:126px; padding:22px 24px; border:1px solid var(--line); border-radius:20px; background:rgba(30,34,38,.9); }
+    .metric span,.metric small { display:block; color:var(--muted); }.metric strong { display:block; margin:5px 0 2px; font-size:34px; line-height:1.1; }.metric small { font-size:12px; }
+    .section { margin-top:64px; scroll-margin-top:24px; }.section-heading { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:20px; }.section-heading h2 { margin:5px 0 0; font-size:30px; letter-spacing:-.025em; }.section-heading > p { max-width:420px; margin:0; color:var(--muted); text-align:right; font-size:14px; }
+    .dimension-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }.dimension-card { min-height:230px; padding:19px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,var(--panel-2),var(--panel)); }.dimension-top { display:flex; min-height:52px; justify-content:space-between; gap:8px; align-items:flex-start; font-weight:700; }.score-line { display:flex; align-items:baseline; gap:4px; margin-top:14px; }.score-line strong { font-size:34px; }.score-line span { color:var(--muted); font-size:12px; }.track { height:8px; margin:8px 0 16px; overflow:hidden; border-radius:999px; background:#30353a; }.track i { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.dimension-card p { margin:0; color:var(--muted); font-size:13px; }
+    .activity-layout { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(230px,.7fr); gap:14px; }.activity-panel,.subpanel,.finding,.custom-grid article,.evidence-grid,.evidence-note { border:1px solid var(--line); border-radius:19px; background:var(--panel); }.activity-panel { padding:22px; overflow:hidden; }.heatmap { display:grid; grid-template-rows:repeat(7,13px); grid-auto-flow:column; grid-auto-columns:13px; gap:4px; min-height:115px; overflow-x:auto; padding-bottom:8px; }.heat-cell { border-radius:3px; background:#2b3035; }.heat-cell.l1{background:#174d70}.heat-cell.l2{background:#206f9e}.heat-cell.l3{background:#319bd1}.heat-cell.l4{background:#70c9ff}.heat-legend { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }.stacked-metrics { display:grid; gap:14px; }.stacked-metrics .metric { min-height:0; }
+    .two-column { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }.subpanel { padding:22px; }.subpanel h3 { font-size:15px; }.usage-list { display:grid; gap:12px; }.usage-row { display:grid; grid-template-columns:minmax(100px,.75fr) 1fr 52px; gap:12px; align-items:center; font-size:12px; }.usage-row > span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }.usage-row i { height:7px; overflow:hidden; border-radius:999px; background:#30353a; }.usage-row b { display:block; height:100%; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.usage-row strong { text-align:right; }
+    .finding-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }.finding-card { min-width:0; min-height:220px; display:flex; flex-direction:column; padding:18px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,#1c2329,var(--panel)); }.finding-card-main { display:grid; gap:10px; }.finding-meta { display:flex; flex-wrap:wrap; gap:7px; }.finding-card h3 { min-height:2.8em; margin:0; display:-webkit-box; overflow:hidden; font-size:17px; line-height:1.4; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-preview { margin:0; color:#c7ced6; display:-webkit-box; overflow:hidden; font-size:13px; line-height:1.55; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-actions,.dialog-actions { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; margin-top:auto; padding-top:16px; }.action-button { min-height:38px; padding:8px 13px; border:1px solid transparent; border-radius:10px; color:var(--text); background:#30363d; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }.action-button:hover { filter:brightness(1.12); }.action-button:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }.action-button.secondary { color:#cceaff; border-color:#286d9b; background:#164e75; }.action-button.ghost { color:#d4dae0; border-color:var(--line); background:transparent; }.finding-dialog,.manual-copy-dialog { width:min(880px,calc(100vw - 32px)); max-height:calc(100vh - 32px); overflow:auto; padding:24px; border:1px solid var(--line); border-radius:20px; color:var(--text); background:var(--panel); box-shadow:0 30px 90px rgba(0,0,0,.55); }.finding-dialog::backdrop,.manual-copy-dialog::backdrop { background:rgba(4,8,12,.72); }.dialog-heading { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }.dialog-heading h3 { margin:6px 0 0; font-size:24px; }.dialog-section { margin-top:18px; }.dialog-section p { margin:7px 0 0; color:#d1d7de; }.dialog-section ol,.dialog-section ul { margin:8px 0 0; padding-left:22px; color:#d1d7de; }.manual-copy-dialog textarea { width:100%; min-height:260px; margin-top:14px; padding:14px; resize:vertical; border:1px solid var(--line); border-radius:12px; color:var(--text); background:#11161b; font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; }.no-js .finding-actions,.no-js .manual-copy-dialog { display:none!important; }.no-js .finding-dialog:not([open]) { display:block; position:static; width:auto; max-height:none; margin-top:16px; box-shadow:none; }
+    .suggestion-block { margin-top:28px; padding-top:24px; border-top:1px solid var(--line); }.suggestion-heading { display:flex; justify-content:space-between; gap:20px; align-items:end; margin-bottom:14px; }.suggestion-heading h3 { margin:4px 0 0; font-size:20px; }.suggestion-heading p { margin:0; color:var(--muted); font-size:12px; }.suggestion-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }.suggestion { padding:18px; border:1px solid var(--line); border-radius:17px; background:linear-gradient(180deg,#1b252d,var(--panel)); }.suggestion-top { display:flex; justify-content:space-between; gap:8px; }.suggestion h3 { margin:13px 0 7px; font-size:16px; }.suggestion > p { color:#c7ced6; font-size:13px; }.suggestion dl { display:grid; gap:9px; margin:14px 0 0; }.suggestion dl div { display:grid; gap:2px; }.suggestion dt { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }.suggestion dd { margin:0; color:#d7dde4; font-size:12px; }
+    .custom-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }.custom-grid article { display:flex; gap:14px; align-items:center; padding:18px; }.custom-grid h3 { margin:0; font-size:15px; }.custom-grid p { margin:3px 0 0; color:var(--muted); font-size:12px; }.custom-mark { display:grid; flex:0 0 38px; aspect-ratio:1; place-content:center; border-radius:12px; color:#d9efff; background:#164e75; font-weight:800; }
+    .evidence-grid { display:grid; grid-template-columns:repeat(3,1fr); overflow:hidden; }.evidence-grid div { padding:20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }.evidence-grid span,.evidence-grid strong { display:block; }.evidence-grid span { color:var(--muted); font-size:12px; }.evidence-grid strong { margin-top:4px; }.evidence-note { margin-top:14px; padding:20px; }.method-note,.empty { color:var(--muted); }.method-note { max-width:800px; margin:18px 0 0; font-size:13px; }
+    footer { margin-top:64px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    @media (max-width:1000px) { .finding-list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:900px) { .metrics,.dimension-grid{grid-template-columns:repeat(2,1fr)}.activity-layout,.two-column{grid-template-columns:1fr}.evidence-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:680px) { .finding-list{grid-template-columns:1fr}.finding-card{min-height:0} }
+    @media (max-width:620px) { main{width:min(100% - 24px,1180px);padding-top:18px}.hero{grid-template-columns:1fr;min-height:0;padding:25px;border-radius:22px}.hero h1{font-size:44px}.hero p{font-size:15px}.score-orbit{width:126px}.score-orbit strong{font-size:34px}.metrics{grid-template-columns:1fr;margin-bottom:42px}.metric{min-height:0}.section{margin-top:46px}.section-heading,.suggestion-heading{display:block}.section-heading > p,.suggestion-heading > p{text-align:left;margin-top:8px}.dimension-grid{grid-template-columns:1fr}.dimension-card{min-height:0}.evidence-grid{grid-template-columns:1fr}.usage-row{grid-template-columns:minmax(92px,.7fr) 1fr 44px}.finding-dialog{padding:18px}.dialog-heading{display:grid} }
+    @media print { :root{color-scheme:light;--bg:#fff;--panel:#fff;--panel-2:#f6f8fa;--line:#d8dee4;--text:#111;--muted:#59636e}body{background:#fff}body::before{display:none}.hero{box-shadow:none}.section{break-inside:avoid}.finding-list{display:block}.finding-card{margin-bottom:16px;break-inside:avoid}.finding-actions,.dialog-actions,.manual-copy-dialog{display:none!important}.finding-dialog:not([open]){display:block!important;position:static;width:auto;max-height:none;margin-top:16px;box-shadow:none} }
+  </style>
+</head>
+<body>
+<div id="copy-status" class="sr-only" role="status" aria-live="polite"></div>
+<main id="harness-report" data-report-mode="codex-html">
+<header class="hero" data-section="overview">
+    <div class="hero-copy">
+      <span class="eyebrow">Harness Insights · Codex HTML</span>
+      <h1>Rhinora Website</h1>
+      <p>The project has a usable Next.js command baseline and a clear server-only Prisma boundary, but foundational risk, focused validation, and revision-bound delivery routes are incomplete. This is a session-limited review: no completed Codex Task Episode was eligible in the selected 30-day window, so recent behavior and learning effectiveness remain unobserved.</p>
+      <div class="hero-tags"><span class="pill accent">agent-work-loop-v4</span><span class="pill muted">Evidence-bound</span></div>
+    </div>
+    <div class="score-orbit"><strong>5</strong><span>reviewed dimensions</span></div>
+  </header>
+  <div class="metrics">
+    <div class="metric">
+    <span>Loop Effectiveness</span>
+    <strong>45 / 100</strong>
+    <small>Changes after later task outcomes</small>
+  </div>
+    <div class="metric">
+    <span>Asset Health / Repair Progress</span>
+    <strong>0 / 100</strong>
+    <small>0 verified · 0 partial · 5 pending</small>
+  </div>
+    <div class="metric">
+    <span>Sessions analyzed</span>
+    <strong>0 / 0</strong>
+    
+  </div>
+    <div class="metric">
+    <span>Findings</span>
+    <strong>5</strong>
+    <small>1 High · 3 Medium</small>
+  </div>
+  </div>
+  <section class="section" data-section="fluency" aria-labelledby="section-fluency">
+    <div class="section-heading">
+      <div><span class="eyebrow">01 · Readiness</span><h2 id="section-fluency">Five-dimension fluency</h2></div>
+      <p>Scores and states come from the reviewed source.</p>
+    </div>
+    <div class="dimension-grid">
+    <article class="dimension-card" data-dimension-id="task-understanding">
+        <div class="dimension-top"><span>Task Understanding</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>50</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Task Understanding 50 of 100"><i style="width:50%"></i></div>
+        <p>Project guidance routes agents to key files, but contradictory and stale runtime statements weaken the authoritative context map.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="controlled-execution">
+        <div class="dimension-top"><span>Controlled Execution</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>56</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Controlled Execution 56 of 100"><i style="width:56%"></i></div>
+        <p>Development, lint, and build routes are runnable, while database mutation commands lack an explicit environment and approval boundary.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="change-validation">
+        <div class="dimension-top"><span>Change Validation</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>45</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Change Validation 45 of 100"><i style="width:45%"></i></div>
+        <p>Lint and build provide fast static feedback, but the database-backed enquiry path has no focused behavior check and an observed malformed-input failure escapes its JSON error contract.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="reliable-delivery">
+        <div class="dimension-top"><span>Reliable Delivery</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>38</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Reliable Delivery 38 of 100"><i style="width:38%"></i></div>
+        <p>The inspected checkout has local validation only; no current-revision acceptance, merge gate, or recovery evidence was available.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="learning-capture">
+        <div class="dimension-top"><span>Learning Capture</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>35</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Learning Capture 35 of 100"><i style="width:35%"></i></div>
+        <p>The bounded Session Evidence lane contained no eligible completed Task Episodes, so recurrence, reusable coverage, and later outcomes cannot be judged.</p>
+      </article>
+  </div>
+  </section>
+  
+  <section class="section" data-section="findings" aria-labelledby="section-findings">
+    <div class="section-heading">
+      <div><span class="eyebrow">03 · Action</span><h2 id="section-findings">Findings and recommendations</h2></div>
+      <p>5 findings · 0 suggestions</p>
+    </div>
+    <div class="finding-list"><article class="finding-card" data-finding-id="database-commands-lack-safety-boundary">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill danger">High</span>
+          <span class="pill neutral">Controlled Execution</span>
+        </div>
+        <h3>Database commands have no environment or approval guard</h3>
+        <p class="finding-preview">The project guide lists migrate, seed, and Studio commands for a Supabase/Postgres-backed application without telling an agent how to distinguish disposable, development, shared, or production targets, when approval is required, or which commands must never run against shared data. This leaves a repository-documented path from routine agent work to persistent database effects without a pre-action decision boundary.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="database-commands-lack-safety-boundary" aria-label="Copy AI Fix: Database commands have no environment or approval guard">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-1" aria-label="View details: Database commands have no environment or approval guard">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-1" data-finding-dialog-id="database-commands-lack-safety-boundary" aria-labelledby="finding-dialog-1-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-1-title">Database commands have no environment or approval guard</h3></div>
+          <span class="pill danger">High</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The project guide lists migrate, seed, and Studio commands for a Supabase/Postgres-backed application without telling an agent how to distinguish disposable, development, shared, or production targets, when approval is required, or which commands must never run against shared data. This leaves a repository-documented path from routine agent work to persistent database effects without a pre-action decision boundary.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Give agents one explicit environment check, approval boundary, and safe stopping rule before database-changing commands.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Inspect the final guide for an explicit pre-action decision and prohibited shared-data path</li><li>Run `git diff --check`</li><li>Do not execute a database mutation as part of this documentation repair</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="database-commands-lack-safety-boundary" aria-label="Copy AI Fix: Database commands have no environment or approval guard">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-1">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="enquiry-path-misses-focused-validation">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Change Validation</span>
+        </div>
+        <h3>Enquiry changes can pass while malformed input breaks the API contract</h3>
+        <p class="finding-preview">The database-backed enquiry path has no test script or focused test owner for required fields, invalid types, malformed JSON, persistence failure, or success. A bounded malformed-JSON probe produced an unstructured HTTP 500 because request parsing occurs outside the route&#39;s error boundary. Lint and production build both pass without exercising this trigger-to-result behavior.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="enquiry-path-misses-focused-validation" aria-label="Copy AI Fix: Enquiry changes can pass while malformed input breaks the API contract">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-2" aria-label="View details: Enquiry changes can pass while malformed input breaks the API contract">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-2" data-finding-dialog-id="enquiry-path-misses-focused-validation" aria-labelledby="finding-dialog-2-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-2-title">Enquiry changes can pass while malformed input breaks the API contract</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The database-backed enquiry path has no test script or focused test owner for required fields, invalid types, malformed JSON, persistence failure, or success. A bounded malformed-JSON probe produced an unstructured HTTP 500 because request parsing occurs outside the route&#39;s error boundary. Lint and production build both pass without exercising this trigger-to-result behavior.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Exercise the enquiry route&#39;s negative, recovery, and success boundaries with one repeatable project-owned check.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Run the exact focused test command introduced by the change</li><li>Run `npm.cmd run lint`</li><li>Run `npm.cmd run build`</li><li>Confirm malformed JSON returns the asserted structured response without a database write</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="enquiry-path-misses-focused-validation" aria-label="Copy AI Fix: Enquiry changes can pass while malformed input breaks the API contract">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-2">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="delivery-has-no-revision-bound-gate">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Reliable Delivery</span>
+        </div>
+        <h3>Local checks are not tied to a delivery decision</h3>
+        <p class="finding-preview">The inspected checkout passes lint and build, but the repository exposes no revision-bound acceptance route that connects those results to review, merge, release, or deployment. The local main branch is ahead of its remote and the working tree is dirty, so current local success does not establish that the complete change set was reviewed or accepted at its delivery boundary.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="delivery-has-no-revision-bound-gate" aria-label="Copy AI Fix: Local checks are not tied to a delivery decision">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-3" aria-label="View details: Local checks are not tied to a delivery decision">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-3" data-finding-dialog-id="delivery-has-no-revision-bound-gate" aria-labelledby="finding-dialog-3-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-3-title">Local checks are not tied to a delivery decision</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The inspected checkout passes lint and build, but the repository exposes no revision-bound acceptance route that connects those results to review, merge, release, or deployment. The local main branch is ahead of its remote and the working tree is dirty, so current local success does not establish that the complete change set was reviewed or accepted at its delivery boundary.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Connect the existing checks to a named review or merge decision for the exact revision being delivered.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Run `npm.cmd run lint`</li><li>Run `npm.cmd run build`</li><li>Confirm the documented acceptance result is bound to one revision and target</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="delivery-has-no-revision-bound-gate" aria-label="Copy AI Fix: Local checks are not tied to a delivery decision">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-3">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="readme-denies-runtime-database">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Task Understanding</span>
+        </div>
+        <h3>Setup guidance says the runtime database is unnecessary</h3>
+        <p class="finding-preview">The README says no local database is required, contact submissions are fixture-backed, and the website does not connect to a database at runtime. The inspected enquiry route imports the Prisma-backed repository and calls `prisma.enquiry.create`, so a fresh agent can follow the setup guide while missing the required `DATABASE_URL` and database availability for the contact workflow.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="readme-denies-runtime-database" aria-label="Copy AI Fix: Setup guidance says the runtime database is unnecessary">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-4" aria-label="View details: Setup guidance says the runtime database is unnecessary">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-4" data-finding-dialog-id="readme-denies-runtime-database" aria-labelledby="finding-dialog-4-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-4-title">Setup guidance says the runtime database is unnecessary</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The README says no local database is required, contact submissions are fixture-backed, and the website does not connect to a database at runtime. The inspected enquiry route imports the Prisma-backed repository and calls `prisma.enquiry.create`, so a fresh agent can follow the setup guide while missing the required `DATABASE_URL` and database availability for the contact workflow.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Let a fresh agent identify the database-dependent route and its environment prerequisite without exposing credentials.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Compare the final README statements with `src/app/api/enquiries/route.ts` and `src/lib/enquiryRepository.ts`</li><li>Run `npm.cmd run build`</li><li>Confirm no secret value or production endpoint was added</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="readme-denies-runtime-database" aria-label="Copy AI Fix: Setup guidance says the runtime database is unnecessary">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-4">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="agent-guide-contains-conflicting-current-state">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill neutral">Low</span>
+          <span class="pill neutral">Task Understanding</span>
+        </div>
+        <h3>The root agent guide gives two different latest commits</h3>
+        <p class="finding-preview">The 89-line project guide says `0b53d7a` is the current latest commit in one section and later says local main contains `67992a8`. The same root context also carries conversation history, completed work, and other volatile status. This duplicated current-state narrative has already drifted and can route agents from incompatible baselines.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="agent-guide-contains-conflicting-current-state" aria-label="Copy AI Fix: The root agent guide gives two different latest commits">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-5" aria-label="View details: The root agent guide gives two different latest commits">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-5" data-finding-dialog-id="agent-guide-contains-conflicting-current-state" aria-labelledby="finding-dialog-5-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-5-title">The root agent guide gives two different latest commits</h3></div>
+          <span class="pill neutral">Low</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The 89-line project guide says `0b53d7a` is the current latest commit in one section and later says local main contains `67992a8`. The same root context also carries conversation history, completed work, and other volatile status. This duplicated current-state narrative has already drifted and can route agents from incompatible baselines.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Keep always-needed project policy in the root guide and move volatile status out of the default context.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Confirm the root guide contains one stable source of truth and no conflicting current-commit claim</li><li>Run `git diff --check`</li><li>Verify any linked handoff owner exists and does not duplicate stable policy</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="agent-guide-contains-conflicting-current-state" aria-label="Copy AI Fix: The root agent guide gives two different latest commits">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-5">Close</button>
+        </div>
+      </dialog>
+    </article></div>
+  </section>
+  <section class="section" data-section="customize" aria-labelledby="section-customize">
+    <div class="section-heading">
+      <div><span class="eyebrow">04 · Capability</span><h2 id="section-customize">Agent Customize</h2></div>
+      <p>Inspected project and authorized host surfaces.</p>
+    </div>
+    <div class="custom-grid"><article><span class="custom-mark">R</span><div><h3>Rules</h3><p>Project · 1</p></div></article></div>
+  </section>
+  <section class="section" data-section="methodology" aria-labelledby="section-methodology">
+    <div class="section-heading">
+      <div><span class="eyebrow">05 · Boundary</span><h2 id="section-methodology">Evidence and methodology</h2></div>
+      <p>Reader-safe evidence only.</p>
+    </div>
+    <div class="evidence-grid"><div><span>Evidence mode</span><strong>—</strong></div><div><span>Task episodes</span><strong>0</strong></div><div><span>Edited episodes</span><strong>0</strong></div><div><span>Sampling</span><strong>0 / 0</strong></div><div><span>Confidence</span><strong>—</strong></div><div><span>Learning state</span><strong>—</strong></div></div>
+    
+    <p class="method-note">Activity totals describe volume, not quality or savings. Fluency conclusions come from the reviewed task sample and remain bounded by the retained evidence.</p>
+  </section>
+<footer>Generated from one reviewed Harness source · self-contained Codex HTML</footer>
+</main>
+<dialog id="manual-copy-dialog" class="manual-copy-dialog" aria-labelledby="manual-copy-title" aria-describedby="manual-copy-description">
+  <div class="dialog-heading">
+    <div>
+      <span class="label">Manual fallback</span>
+      <h3 id="manual-copy-title">Copy the AI Fix prompt</h3>
+    </div>
+  </div>
+  <p id="manual-copy-description">Automatic copy was blocked. The exact prompt is selected below.</p>
+  <textarea id="manual-copy-text" readonly aria-label="AI Fix prompt"></textarea>
+  <div class="dialog-actions">
+    <button type="button" class="action-button ghost" data-close-finding-dialog="manual-copy-dialog">Close</button>
+  </div>
+</dialog>
+<script id="harness-report-data" type="application/json">{"mode":"html","language":"en","dataPath":"H:\\T1 XNP\\XNP Website\\.codex\\better-harness\\2026-07-30T063511Z\\findings.json","target":{"name":"XNP Website","path":"H:\\T1 XNP\\XNP Website"},"summary":{"projectName":"Rhinora Website","locale":"en","modelId":"agent-work-loop-v4","reportContractVersion":25,"overview":"The project has a usable Next.js command baseline and a clear server-only Prisma boundary, but foundational risk, focused validation, and revision-bound delivery routes are incomplete. This is a session-limited review: no completed Codex Task Episode was eligible in the selected 30-day window, so recent behavior and learning effectiveness remain unobserved.","dimensions":[{"id":"task-understanding","label":"Task Understanding","score":50,"summary":"Project guidance routes agents to key files, but contradictory and stale runtime statements weaken the authoritative context map.","findingRefs":["readme-denies-runtime-database","agent-guide-contains-conflicting-current-state"]},{"id":"controlled-execution","label":"Controlled Execution","score":56,"summary":"Development, lint, and build routes are runnable, while database mutation commands lack an explicit environment and approval boundary.","findingRefs":["database-commands-lack-safety-boundary"]},{"id":"change-validation","label":"Change Validation","score":45,"summary":"Lint and build provide fast static feedback, but the database-backed enquiry path has no focused behavior check and an observed malformed-input failure escapes its JSON error contract.","findingRefs":["enquiry-path-misses-focused-validation"]},{"id":"reliable-delivery","label":"Reliable Delivery","score":38,"summary":"The inspected checkout has local validation only; no current-revision acceptance, merge gate, or recovery evidence was available.","findingRefs":["delivery-has-no-revision-bound-gate"]},{"id":"learning-capture","label":"Learning Capture","score":35,"summary":"The bounded Session Evidence lane contained no eligible completed Task Episodes, so recurrence, reusable coverage, and later outcomes cannot be judged.","findingRefs":[]}],"aiAgentPractice":{"inspectedSurfaces":["Rules"],"coverageRows":[{"surface":"Rules","scopes":["Project"],"count":1,"paths":["AGENTS.md"]}]},"assignmentSummaries":[]},"findings":[{"id":"database-commands-lack-safety-boundary","title":"Database commands have no environment or approval guard","severity":"High","reason":"The project guide lists migrate, seed, and Studio commands for a Supabase/Postgres-backed application without telling an agent how to distinguish disposable, development, shared, or production targets, when approval is required, or which commands must never run against shared data. This leaves a repository-documented path from routine agent work to persistent database effects without a pre-action decision boundary.","dimensionRefs":["controlled-execution"],"subdimensionRefs":["permission-boundary"],"aiFixPrompt":"/better-harness fix this issue\n\nUpdate the canonical project agent guide with the smallest repo-specific database safety contract. Preserve the server-only Prisma rule. State that the target database must be identified before any Prisma migration, seed, or Studio command; require explicit approval before commands that can affect shared or production data; and define the disposable development/test route if one exists. Do not invent credentials, environments, or a reset command.\n\n## Validation\n\n- Inspect the final guide for an explicit pre-action decision and prohibited shared-data path\n- Run `git diff --check`\n- Do not execute a database mutation as part of this documentation repair","expectedArtifact":"Agent instruction safety rule","expectedOutput":["Give agents one explicit environment check, approval boundary, and safe stopping rule before database-changing commands."]},{"id":"enquiry-path-misses-focused-validation","title":"Enquiry changes can pass while malformed input breaks the API contract","severity":"Medium","reason":"The database-backed enquiry path has no test script or focused test owner for required fields, invalid types, malformed JSON, persistence failure, or success. A bounded malformed-JSON probe produced an unstructured HTTP 500 because request parsing occurs outside the route's error boundary. Lint and production build both pass without exercising this trigger-to-result behavior.","dimensionRefs":["change-validation"],"subdimensionRefs":["relevant-check"],"aiFixPrompt":"/better-harness fix this issue\n\nAdd the smallest focused regression route for `POST /api/enquiries`. First capture malformed JSON, missing fields, invalid enquiry type, repository failure, and success expectations. Move request parsing inside a bounded JSON error path so malformed input returns the documented structured client-error response. If a new test dependency is required, obtain approval before changing runtime dependencies or the lockfile.\n\n## Validation\n\n- Run the exact focused test command introduced by the change\n- Run `npm.cmd run lint`\n- Run `npm.cmd run build`\n- Confirm malformed JSON returns the asserted structured response without a database write","expectedArtifact":"Focused enquiry API regression test","expectedOutput":["Exercise the enquiry route's negative, recovery, and success boundaries with one repeatable project-owned check."]},{"id":"delivery-has-no-revision-bound-gate","title":"Local checks are not tied to a delivery decision","severity":"Medium","reason":"The inspected checkout passes lint and build, but the repository exposes no revision-bound acceptance route that connects those results to review, merge, release, or deployment. The local main branch is ahead of its remote and the working tree is dirty, so current local success does not establish that the complete change set was reviewed or accepted at its delivery boundary.","dimensionRefs":["reliable-delivery"],"subdimensionRefs":["acceptance-evidence"],"aiFixPrompt":"/better-harness fix this issue\n\nDefine the project's real delivery acceptance boundary and make the existing validation commands part of it. Compose `npm.cmd run lint` and `npm.cmd run build` into the smallest project-owned verification route, document the required clean revision and review evidence, and add host automation only after the repository host and permissions are confirmed. Do not push, change branch protection, or create external workflows without separate authority.\n\n## Validation\n\n- Run `npm.cmd run lint`\n- Run `npm.cmd run build`\n- Confirm the documented acceptance result is bound to one revision and target","expectedArtifact":"Revision-bound acceptance contract","expectedOutput":["Connect the existing checks to a named review or merge decision for the exact revision being delivered."]},{"id":"readme-denies-runtime-database","title":"Setup guidance says the runtime database is unnecessary","severity":"Medium","reason":"The README says no local database is required, contact submissions are fixture-backed, and the website does not connect to a database at runtime. The inspected enquiry route imports the Prisma-backed repository and calls `prisma.enquiry.create`, so a fresh agent can follow the setup guide while missing the required `DATABASE_URL` and database availability for the contact workflow.","dimensionRefs":["task-understanding"],"subdimensionRefs":["relevant-context"],"aiFixPrompt":"/better-harness fix this issue\n\nCorrect `README.md` so it distinguishes fixture-backed catalogue content from Prisma/Postgres-backed enquiry submission. Document the required server-side `DATABASE_URL`, keep credentials out of the file, and state which routes can run without database access. Preserve the existing Windows `npm.cmd` guidance.\n\n## Validation\n\n- Compare the final README statements with `src/app/api/enquiries/route.ts` and `src/lib/enquiryRepository.ts`\n- Run `npm.cmd run build`\n- Confirm no secret value or production endpoint was added","expectedArtifact":"Accurate runtime setup guide","expectedOutput":["Let a fresh agent identify the database-dependent route and its environment prerequisite without exposing credentials."]},{"id":"agent-guide-contains-conflicting-current-state","title":"The root agent guide gives two different latest commits","severity":"Low","reason":"The 89-line project guide says `0b53d7a` is the current latest commit in one section and later says local main contains `67992a8`. The same root context also carries conversation history, completed work, and other volatile status. This duplicated current-state narrative has already drifted and can route agents from incompatible baselines.","dimensionRefs":["task-understanding"],"subdimensionRefs":["relevant-context"],"aiFixPrompt":"/better-harness fix this issue\n\nMake `AGENTS.md` the lean canonical owner for stable commands, safety rules, and task routing. Remove duplicated commit and conversation status from the root guide, retain the early server-only Prisma boundary, and route volatile handoff state to one clearly named project document only if the project wants to maintain it. Use the conventional `AGENTS.md` filename for portable discovery.\n\n## Validation\n\n- Confirm the root guide contains one stable source of truth and no conflicting current-commit claim\n- Run `git diff --check`\n- Verify any linked handoff owner exists and does not duplicate stable policy","expectedArtifact":"Progressively disclosed agent guide","expectedOutput":["Keep always-needed project policy in the root guide and move volatile status out of the default context."]}]}</script>
+<script id="harness-report-interactions">(function installHtmlReportInteractions({
+  document,
+  navigator,
+  labels,
+  schedule = (callback, delay) => globalThis.setTimeout(callback, delay),
+}) {
+  document.documentElement.classList.remove("no-js");
+
+  const reportDataElement = document.getElementById("harness-report-data");
+  const reportData = reportDataElement
+    ? JSON.parse(reportDataElement.textContent || "{}")
+    : {};
+  const findings = new Map(
+    (Array.isArray(reportData.findings) ? reportData.findings : [])
+      .map((finding) => [String(finding?.id ?? ""), finding]),
+  );
+  const status = document.getElementById("copy-status");
+  const manualDialog = document.getElementById("manual-copy-dialog");
+  const manualText = document.getElementById("manual-copy-text");
+  const dialogTriggers = new Map();
+
+  function report(message, state) {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function legacyCopy(prompt) {
+    const textarea = document.createElement("textarea");
+    textarea.value = prompt;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    try {
+      textarea.select();
+      return document.execCommand("copy") === true;
+    } catch {
+      return false;
+    } finally {
+      textarea.remove();
+    }
+  }
+
+  function copied(trigger) {
+    report(labels.copySuccess, "success");
+    if (trigger) {
+      const originalLabel = trigger.textContent;
+      trigger.textContent = labels.copied;
+      schedule(() => {
+        trigger.textContent = originalLabel || labels.copy;
+      }, 1800);
+    }
+    return true;
+  }
+
+  async function copyFinding(findingId, trigger) {
+    const prompt = findings.get(String(findingId))?.aiFixPrompt;
+    if (typeof prompt !== "string" || prompt.length === 0) {
+      report(labels.missingPrompt, "error");
+      return false;
+    }
+
+    try {
+      if (!navigator?.clipboard?.writeText) throw new Error("Clipboard API unavailable");
+      await navigator.clipboard.writeText(prompt);
+      return copied(trigger);
+    } catch {
+      if (legacyCopy(prompt)) return copied(trigger);
+    }
+
+    if (manualDialog && typeof manualDialog.showModal === "function") {
+      dialogTriggers.set(manualDialog.id, trigger);
+      if (!manualDialog.open) manualDialog.showModal();
+    }
+    if (manualText) {
+      manualText.value = prompt;
+      manualText.focus();
+      manualText.select();
+    }
+    report(labels.manualCopy, "error");
+    return false;
+  }
+
+  function openDialog(dialogId, trigger) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || typeof dialog.showModal !== "function") return false;
+    dialogTriggers.set(dialogId, trigger);
+    dialog.showModal();
+    return true;
+  }
+
+  function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || !dialog.open || typeof dialog.close !== "function") return false;
+    dialog.close();
+    return true;
+  }
+
+  for (const trigger of document.querySelectorAll("[data-copy-finding]")) {
+    trigger.addEventListener("click", () => copyFinding(trigger.dataset.copyFinding, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-view-finding-dialog]")) {
+    trigger.addEventListener("click", () => openDialog(trigger.dataset.viewFindingDialog, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-close-finding-dialog]")) {
+    trigger.addEventListener("click", () => closeDialog(trigger.dataset.closeFindingDialog));
+  }
+  const interactiveDialogs = [
+    ...document.querySelectorAll("dialog[data-finding-dialog-id]"),
+    manualDialog,
+  ].filter(Boolean);
+  for (const dialog of interactiveDialogs) {
+    dialog.addEventListener("close", () => {
+      const trigger = dialogTriggers.get(dialog.id);
+      dialogTriggers.delete(dialog.id);
+      trigger?.focus();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      const outside = event.clientX < rect.left
+        || event.clientX > rect.right
+        || event.clientY < rect.top
+        || event.clientY > rect.bottom;
+      if (outside) closeDialog(dialog.id);
+    });
+  }
+
+  return { copyFinding, openDialog, closeDialog };
+})({document,navigator,labels:{"copy":"Copy AI Fix","copied":"Copied","copySuccess":"Copied. Paste into the Codex input.","manualCopy":"Automatic copy was blocked. Copy the selected prompt manually.","missingPrompt":"No AI Fix prompt is available for this finding."}});</script>
+</body>
+</html>
